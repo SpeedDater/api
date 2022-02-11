@@ -10,23 +10,36 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+from django.core.management.utils import get_random_secret_key
+from os import environ
+from os.path import join
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-kv=btx@s2i@fiy=-d#%uh0sw7&**!)cooza!fe^auna!dcb7x#'
+try:
+    SECRET_KEY = environ['SECRET_KEY']
+except KeyError:
+    SECRET_KEY = get_random_secret_key()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Try to set DEBUG from environment variable
+DEBUG = False
+try:
+    DEBUG = (environ['DEBUG'].lower() == 'true')
+except KeyError:
+    pass
 
 ALLOWED_HOSTS = []
-
+try:
+    ALLOWED_HOSTS = environ['ALLOWED_HOSTS'].split(',')
+except KeyError:
+    pass
 
 # Application definition
 
@@ -107,6 +120,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = join(BASE_DIR, 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
