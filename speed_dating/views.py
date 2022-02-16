@@ -1,5 +1,5 @@
 from rest_framework import viewsets
-from rest_framework import permissions
+from api import permissions
 from speed_dating.models import Profile
 from speed_dating.serializers import ProfileSerializer
 
@@ -10,4 +10,4 @@ class ProfileViewSet(viewsets.ModelViewSet):
     """
     queryset = Profile.objects.all().order_by('user')
     serializer_class = ProfileSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAdminOwnerOrReadOnly]
