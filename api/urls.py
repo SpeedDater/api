@@ -30,6 +30,11 @@ router.register('users', configuration.views.UserViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('admin/configuration/bulk_update/', configuration.views.BulkUpdateView.as_view(), name="bulk_update"),
+    path('admin/configuration/bulk_update/major/', configuration.views.MajorBulkUpdateView.as_view(), 
+         name="bulk_update_major"),
+    path('admin/configuration/bulk_update/skill/', configuration.views.SkillBulkUpdateView.as_view(),
+         name="bulk_update_skill"),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
