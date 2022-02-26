@@ -2,6 +2,8 @@
 {% block title %}Log in{% endblock %}
 {% block body %}
 <h2>Log In</h2>
+
+<h3>Username/Password</h3>
 <form method="POST">
   {% csrf_token %}
   {{ form.as_p }}

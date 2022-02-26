@@ -1,14 +1,12 @@
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth.models import Group
-from django.contrib.auth.views import LoginView, LogoutView
 from configuration.models import *
 
+# set admin site name
 admin.site.site_header = settings.APP_NAME
 admin.site.site_title = settings.APP_NAME
 admin.site.index_title = 'Admin Panel'
-# use default login views
-admin.site.login = LoginView.as_view()
 # disable Django groups
 admin.site.unregister(Group)
 
