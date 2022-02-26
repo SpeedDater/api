@@ -32,7 +32,8 @@ router.register('users', configuration.views.UserViewSet)
 urlpatterns = [
     # API endpoints
     path('', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    # Django authentication
+    path('auth/', include('django.contrib.auth.urls')),
     # Configuration server-side views
     path('configuration/', include('configuration.urls', namespace="configuration")),
     # OpenAPI and Swagger UI

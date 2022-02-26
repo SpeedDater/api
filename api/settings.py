@@ -55,16 +55,20 @@ except KeyError:
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    # Django modules
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # DRF modules
     'rest_framework',
+    # our apps
     'configuration',
     'openapi',
     'speed_dating',
+    # Django admin module
+    'django.contrib.admin',
 ]
 
 MIDDLEWARE = [
@@ -143,6 +147,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Support reverse proxy headers
 USE_X_FORWARDED_HOST = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Use Django authentication pages
+LOGIN_URL = 'login'
 
 # Django REST Framework
 
