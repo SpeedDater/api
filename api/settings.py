@@ -39,9 +39,16 @@ try:
 except KeyError:
     pass
 
-ALLOWED_HOSTS = []
 try:
-    ALLOWED_HOSTS = environ['ALLOWED_HOSTS'].split(',')
+    CSRF_TRUSTED_ORIGINS = environ['TRUSTED_ORIGINS'].split(',')
+    # build ALLOWED_HOSTS based on CSRF_TRUSTED_ORIGINS
+    ALLOWED_HOSTS = [] 
+    for host in CSRF_TRUSTED_ORIGINS:
+        # strip http:// and https://
+        host = host.replace('http://', '').replace('https://', '')
+        # strip port number
+        host = host.split(':')[0]
+        ALLOWED_HOSTS.append(host)
 except KeyError:
     pass
 
