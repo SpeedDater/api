@@ -15,6 +15,10 @@ from os import environ
 from os.path import join
 from pathlib import Path
 
+# Application NAME and VERSION
+APP_NAME = 'SpeedDater407'
+APP_VERSION = '0.0.1-alpha'
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -52,6 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'configuration',
+    'openapi',
     'speed_dating',
 ]
 
