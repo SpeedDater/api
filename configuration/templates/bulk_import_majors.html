@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Bulk Update</title>
+	<title>Bulk Import Majors</title>
 </head>
 <body>
 	<style>
@@ -15,15 +15,8 @@
 	</style>
 	<h1>Bulk Import</h1>
 	<h2>Majors</h2>
-	<form action="{% url 'bulk_update_major' %}" method="POST">
+	<form method="POST">
 		<label>Major (enter one major per line)</label>
-		<p>{{ form.content }}</p>
-		{% csrf_token %}
-		<button type="submit">Submit</button>
-	</form>
-	<h2>Skills</h2>
-	<form action="{% url 'bulk_update_skill' %}" method="POST">
-		<label>Skills (enter one skill per line):</label>
 		<p>{{ form.content }}</p>
 		{% csrf_token %}
 		<button type="submit">Submit</button>

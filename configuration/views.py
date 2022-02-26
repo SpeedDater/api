@@ -48,30 +48,18 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 @method_decorator(staff_member_required(), name='dispatch')
-class BulkUpdateView(TemplateView):
-    """
-    A view for admins to bulk import majors.
-    """
-    template_name = 'bulk_update.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['form'] = BulkUpdateForm()
-        return context
-
-
-@method_decorator(staff_member_required(), name='dispatch')
 class MajorBulkUpdateView(FormView):
     """
     A view for admins to bulk import majors.
     """
     form_class = BulkUpdateForm
-    success_url = reverse_lazy('bulk_update')
-
-    def get(self, request):
-        return HttpResponseNotAllowed(['POST'])
+    success_url = reverse_lazy('admin:configuration_major_changelist')
+    template_name = 'bulk_import_majors.html'
 
     def form_valid(self, form):
+        from django.urls import get_resolver
+        urls = get_resolver().reverse_dict.keys()
+        print(urls)
         # load input per line
         majors = form.cleaned_data['content'].split('\r\n')
         # build objects list, bulk create in db, ignore non-unique objects
@@ -86,10 +74,8 @@ class SkillBulkUpdateView(FormView):
     A view for admins to bulk import skills.
     """
     form_class = BulkUpdateForm
-    success_url = reverse_lazy('bulk_update')
-
-    def get(self, request):
-        return HttpResponseNotAllowed(['POST'])
+    success_url = reverse_lazy('admin:configuration_skill_changelist')
+    template_name = 'bulk_import_skills.html'
 
     def form_valid(self, form):
         # load input per line

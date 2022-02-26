@@ -30,14 +30,13 @@ router.register('skills', configuration.views.SkillViewSet)
 router.register('users', configuration.views.UserViewSet)
 
 urlpatterns = [
+    # API endpoints
     path('', include(router.urls)),
-    path('admin/configuration/bulk_update/', configuration.views.BulkUpdateView.as_view(), name="bulk_update"),
-    path('admin/configuration/bulk_update/major/', configuration.views.MajorBulkUpdateView.as_view(), 
-         name="bulk_update_major"),
-    path('admin/configuration/bulk_update/skill/', configuration.views.SkillBulkUpdateView.as_view(),
-         name="bulk_update_skill"),
-    path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    # Configuration server-side views
+    path('configuration/', include('configuration.urls', namespace="configuration")),
     # OpenAPI and Swagger UI
     path('', include('openapi.urls', namespace="openapi")),
+    # Django admin
+    path('admin/', admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
