@@ -6,22 +6,22 @@ from configuration.models import *
 class MajorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Major
-        fields = ['url', 'major']
+        fields = ['id', 'major']
 
 
 class SectionTimeSerializer(serializers.ModelSerializer):
     class Meta:
         model = SectionTime
-        fields = ['url', 'start', 'end']
+        fields = ['id', 'start', 'end']
 
 
 class SkillSerializer(serializers.ModelSerializer):
     class Meta:
         model = Skill
-        fields = ['url', 'skill']
+        fields = ['id', 'skill']
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['url', 'first_name', 'last_name', 'email']
+        fields = ['id', 'first_name', 'last_name', 'email']
