@@ -73,3 +73,6 @@ Dockerfile
 .env.example
 .gitignore
 .github/
+
+# config
+.env
