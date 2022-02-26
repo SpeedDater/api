@@ -17,7 +17,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic.base import TemplateView
 from rest_framework import routers
+from rest_framework.schemas import get_schema_view
 import configuration.views
 import speed_dating.views
 
@@ -36,5 +38,9 @@ urlpatterns = [
     path('admin/configuration/bulk_update/skill/', configuration.views.SkillBulkUpdateView.as_view(),
          name="bulk_update_skill"),
     path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('openapi', get_schema_view(title="SpeedDater407", version="1.0.0"), name='openapi-schema'),
+    path('swagger-ui/', TemplateView.as_view(
+            template_name='swagger.html', extra_context={'schema_url':'openapi-schema'}
+        ), name='swagger-ui'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
