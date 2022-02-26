@@ -8,6 +8,8 @@ jobs:
   build:
     name: Build Container Image
     runs-on: ubuntu-latest
+    env:
+      PACKAGE_NAME: speeddater407/api
     steps:
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -23,7 +25,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ghcr.io/${{ github.repository }}:latest
+          tags: ghcr.io/${{ env.PACKAGE_NAME }}:latest
       - name: Remove untagged images
         uses: actions/github-script@v3
         with:
