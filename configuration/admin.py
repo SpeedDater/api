@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth.models import Group
+from social_django.admin import Association, Nonce, UserSocialAuth
 from configuration.models import *
 
 # set admin site name
@@ -9,6 +10,10 @@ admin.site.site_title = settings.APP_NAME
 admin.site.index_title = 'Admin Panel'
 # disable Django groups
 admin.site.unregister(Group)
+# disable python-social-auth modules
+admin.site.unregister(Association)
+admin.site.unregister(Nonce)
+admin.site.unregister(UserSocialAuth)
 
 
 @admin.register(SectionTime)
