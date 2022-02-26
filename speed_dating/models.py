@@ -18,11 +18,11 @@ class Profile(models.Model):
     looking_for = models.TextField(blank=False)
     anything_else = models.TextField(blank=False)
 
-    def get_name(self):
+    def full_name(self):
         return self.user.get_full_name()
     
-    def get_email(self):
-        return self.user.email()
+    def email(self):
+        return self.user.email
 
     def __str__(self):
-        return f'{self.user.get_full_name()} ({self.user.username})'
+        return self.user.username
