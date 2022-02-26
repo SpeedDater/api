@@ -13,9 +13,23 @@
 				font-family: sans-serif;
 				margin-top: 40px;
 			}
+			textarea {
+				width: 100%;
+				height: 20rem;
+			}
+			.container {
+				max-width: 75rem;
+  				margin: auto;
+			}
+			.error {
+				color: firebrick;
+			}
 		</style>
-		<h1>{{ APP_NAME }}</h1>
-		{% block body %} {% endblock %}
+		<div class="container">
+			<h1>{{ APP_NAME }}</h1>
+			<hr>
+			{% block body %} {% endblock %}
+		</div>
 	</body>
 	</html>
 </body>
