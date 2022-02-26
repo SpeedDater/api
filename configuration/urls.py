@@ -19,8 +19,9 @@ from configuration import views
 app_name = 'configuration'
 
 urlpatterns = [
-    path('bulk_import/major/', views.MajorBulkUpdateView.as_view(),
+    path('add-staff/', views.AddStaffView.as_view(), name="add_staff"),
+    path('bulk-import/major/', views.MajorBulkUpdateView.as_view(),
          name="bulk_import_major"),
-    path('bulk_import/skill/', views.SkillBulkUpdateView.as_view(),
+    path('bulk-import/skill/', views.SkillBulkUpdateView.as_view(),
          name="bulk_import_skill"),
 ]

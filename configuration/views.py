@@ -1,12 +1,11 @@
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.models import User
-from django.http import HttpResponseNotAllowed
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import FormView, TemplateView
 from rest_framework import viewsets
 from api import permissions
-from configuration.forms import BulkUpdateForm
+from configuration.forms import *
 from configuration.models import *
 from configuration.serializers import *
 
@@ -48,6 +47,34 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 @method_decorator(staff_member_required(), name='dispatch')
+class AddStaffView(FormView):
+    "A view for admins to add staff user accounts."
+    form_class = AddStaffForm
+    success_url = reverse_lazy('admin:auth_user_changelist')
+    template_name = 'add_staff.html'
+
+    def form_valid(self, form):
+        email = form.cleaned_data['email']
+        first_name = form.cleaned_data['first_name']
+        last_name = form.cleaned_data['last_name']
+        # derive username from email address
+        username = email.split('@')[0]
+        # remove existing user
+        try:
+            user = User.objects.get(email=email)
+            user.delete()
+        except user.DoesNotExist:
+            pass
+        # build new user object
+        user = User(username=username, email=email, first_name=first_name, last_name=last_name)
+        user.is_staff = True
+        user.is_superuser = True
+        user.set_unusable_password()
+        user.save()
+        return super().form_valid(form)
+
+
+@method_decorator(staff_member_required(), name='dispatch')
 class MajorBulkUpdateView(FormView):
     """
     A view for admins to bulk import majors.
@@ -57,9 +84,6 @@ class MajorBulkUpdateView(FormView):
     template_name = 'bulk_import_majors.html'
 
     def form_valid(self, form):
-        from django.urls import get_resolver
-        urls = get_resolver().reverse_dict.keys()
-        print(urls)
         # load input per line
         majors = form.cleaned_data['content'].split('\r\n')
         # build objects list, bulk create in db, ignore non-unique objects

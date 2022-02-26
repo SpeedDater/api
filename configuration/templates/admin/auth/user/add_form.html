@@ -1,0 +1,13 @@
+{% extends "admin/change_form.html" %}
+{% load i18n %}
+
+{% block form_top %}
+<h2>Warning!</h3>
+<ul>
+	<li><strong>You should NOT need to use this form to add user accounts!</strong> When users sign in
+		with an identity provider (such as Google), an account will be automatically created for them.
+	</li>
+	<li>If you want to add a staff account, click <a href="{% url 'configuration:add_staff' %}">here</a>.</li>
+</ul>
+<hr><br>
+{% endblock %}
