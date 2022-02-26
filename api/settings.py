@@ -69,6 +69,8 @@ INSTALLED_APPS = [
     'speed_dating',
     # Django admin module
     'django.contrib.admin',
+    # python-social-auth modules
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -95,6 +97,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
             ],
         },
     },
@@ -112,6 +115,14 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+# Authentication backends
+# https://docs.djangoproject.com/en/4.0/ref/settings/#authentication-backends
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+]
 
 
 # Password validation
@@ -145,11 +156,25 @@ STATIC_ROOT = join(BASE_DIR, 'static')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Support reverse proxy headers
-USE_X_FORWARDED_HOST = True
+# https://docs.djangoproject.com/en/4.0/ref/settings/#secure-proxy-ssl-header
+
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Use Django authentication pages
-LOGIN_URL = 'login'
+# https://docs.djangoproject.com/en/4.0/ref/settings/#login-url
+
+LOGIN_REDIRECT_URL = '/'
+
+# python-social-auth provider config
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+try:
+    SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = environ['GOOGLE_OAUTH_CLIENT_ID']
+    SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = environ['GOOGLE_OAUTH_CLIENT_SECRET']
+    # enable Google OAuth support if client creds are configured
+    AUTHENTICATION_BACKENDS.append('social_core.backends.google.GoogleOAuth2')
+except KeyError:
+    pass
 
 # Django REST Framework
 

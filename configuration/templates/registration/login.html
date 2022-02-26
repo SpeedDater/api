@@ -2,6 +2,14 @@
 {% block title %}Log in{% endblock %}
 {% block body %}
 <h2>Log In</h2>
+{% block extra %}{% endblock %}
+
+<h3>Identity Providers</h3>
+<ul>
+{% for backend in backends.backends %}
+  <li><a href="{% url 'social:begin' backend %}{% if request.GET.next %}?next={{ request.GET.next }}{% endif %}">{{ backend }}</a></li>
+{% endfor %}
+</ul>
 
 <h3>Username/Password</h3>
 <form method="POST">

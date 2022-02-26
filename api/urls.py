@@ -17,7 +17,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from django.views.generic.base import TemplateView
 from rest_framework import routers
 import configuration.views
 import speed_dating.views
@@ -33,11 +32,13 @@ urlpatterns = [
     # API endpoints
     path('', include(router.urls)),
     # Django authentication
-    path('auth/', include('django.contrib.auth.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    # python-social-auth
+    path('accounts/social/', include('social_django.urls', namespace='social')),
+    # Django admin
+    path('admin/', admin.site.urls),
     # Configuration server-side views
     path('configuration/', include('configuration.urls', namespace="configuration")),
     # OpenAPI and Swagger UI
     path('', include('openapi.urls', namespace="openapi")),
-    # Django admin
-    path('admin/', admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
