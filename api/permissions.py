@@ -32,20 +32,16 @@ class IsAdminOwnerOrReadOnly(permissions.BasePermission):
         if not request.user:
             # default deny is user can't be found
             return False
-        if request.method in permissions.SAFE_METHODS:
-            # read allowed for any authenticated user
-            return request.user.is_authenticated
-        else:
-            # write allowed for staff (see Django user model)
-            return request.user.is_staff
+        # write allowed if authenticated
+        return request.user.is_authenticated
 
     def has_object_permission(self, request, view, obj):
-        # if not request.user:
-        #     # default deny is user can't be found
-        #     return False
+        if not request.user:
+            # default deny is user can't be found
+            return False
         if request.method in permissions.SAFE_METHODS:
             # read allowed for any authenticated user
             return request.user.is_authenticated
         else:
-            # write allowed for user who created the object
-            return obj.user == request.user
+            # write allowed for user who created the object or staff
+            return obj.user == request.user or request.user.is_staff
