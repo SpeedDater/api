@@ -2,12 +2,13 @@
 {% load i18n %}
 
 {% block form_top %}
-<h2>Warning!</h3>
-	<ul>
-		<li><strong>DO NOT use this form to add user accounts!</strong> When users sign in
-			with an identity provider (such as Google), an account will be automatically created for them.
-		</li>
-		<li>If you want to add a staff account, click <a href="{% url 'admin_pages:add_staff' %}">here</a>.</li>
-	</ul>
-	<hr><br>
+<h2>WARNING</h2>
+<ul>
+	<li>If you're using an external identity provider (such as Google), <strong>DO NOT USE this page to add user
+		accounts!</strong> When users sign in with the external provider (such as Google), an account will be
+		automatically created.</li>
+	<li>If you want to add a staff account, click
+		<a href="{% url 'admin_pages:add_staff' %}"><strong>here</strong></a>.</li>
+</ul>
+<hr><br>
 {% endblock %}

@@ -16,6 +16,12 @@
 
 {% block content %}
 <div id="content-main">
+	<h2>Important:</h2>
+	<ul>
+		<li>To import skills, enter <strong>one skill per line</strong> in the box below.</li>
+		<li>Duplicates will be ignored.</li>
+	</ul>
+	<hr><br>
 	<form method="POST">
 		{% csrf_token %}
 		<fieldset class="module aligned">

@@ -16,6 +16,15 @@
 
 {% block content %}
 <div id="content-main">
+	<h2>Important:</h2>
+	<ul>
+		<li>The account you're adding here will become a <strong>staff account</strong> with <strong>full admin
+			privileges </strong> in {{ APP_NAME }}!</li>
+		<li>The provided email address <strong>MUST match</strong> their external identity provider (such as Google)
+			account! For example, if user will sign in with Google, the email address here MUST match their Google email
+			address.</li>
+	</ul>
+	<hr><br>
 	{% if form.errors %}
 	<p class="errornote">Please correct the error below.</p>
 	{% endif %}
@@ -25,8 +34,10 @@
 			{% for field in form %}
 			<div class="form-row {% if field.errors %}errors{% endif %}">
 				{{ field.errors }}
-				<label for="{{ field.id_for_label }}" {% if field.field.required %}class="required"{% endif %}>{{ field.label }}:</label>
-				<input class="vTextField" name="{{ field.name }}" id="{{ field.id_for_label }}" {% if field.field.required %}required{% endif %}>
+				<label for="{{ field.id_for_label }}" {% if field.field.required %}class="required" {% endif %}>
+					{{ field.label }}:</label>
+				<input class="vTextField" name="{{ field.name }}" id="{{ field.id_for_label }}" 
+					{% if field.field.required %}required{% endif %}>
 			</div>
 			{% endfor %}
 		</fieldset>
