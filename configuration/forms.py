@@ -8,5 +8,4 @@ class AddStaffForm(forms.Form):
 
 
 class BulkUpdateForm(forms.Form):
-    content = forms.CharField(widget=forms.Textarea,
-                              label="Skills (enter one per line)")
+    content = forms.CharField(widget=forms.Textarea)

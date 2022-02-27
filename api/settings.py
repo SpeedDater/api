@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     # DRF modules
     'rest_framework',
     # our apps
+    'admin_pages',
     'configuration',
     'openapi',
     'speed_dating',

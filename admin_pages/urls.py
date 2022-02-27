@@ -1,4 +1,4 @@
-"""URL Configuration
+"""admin_pages URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.0/topics/http/urls/
@@ -14,14 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path, include
-from configuration import views
+from admin_pages import views
 
-app_name = 'configuration'
+app_name = 'admin_pages'
 
 urlpatterns = [
-    path('add-staff/', views.AddStaffView.as_view(), name="add_staff"),
-    path('bulk-import/major/', views.MajorBulkUpdateView.as_view(),
+    path('auth/user/add-staff/', views.AddStaffView.as_view(), name="add_staff"),
+    path('configuration/major/bulk-import/', views.MajorBulkUpdateView.as_view(),
          name="bulk_import_major"),
-    path('bulk-import/skill/', views.SkillBulkUpdateView.as_view(),
+    path('configuration/skill/bulk-import/', views.SkillBulkUpdateView.as_view(),
          name="bulk_import_skill"),
 ]

@@ -35,10 +35,10 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     # python-social-auth
     path('accounts/social/', include('social_django.urls', namespace='social')),
+    # Extra admin pages
+    path('admin/', include('admin_pages.urls', namespace="admin_pages")),
     # Django admin
     path('admin/', admin.site.urls),
-    # Configuration server-side views
-    path('configuration/', include('configuration.urls', namespace="configuration")),
     # OpenAPI and Swagger UI
     path('', include('openapi.urls', namespace="openapi")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -1,0 +1,32 @@
+{% extends 'admin/base_site.html' %}
+{% load static %}
+
+{% block extrastyle %}{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/forms.css' %}">
+{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+	<a href="{% url 'admin:index' %}">Home</a>
+	&rsaquo; <a href="{% url 'admin:app_list' app_label='configuration' %}">Configuration</a>
+	&rsaquo; <a href="{% url 'admin:configuration_skill_changelist' %}">Skills</a>
+	&rsaquo; Bulk import
+</div>
+{% endblock %}
+
+{% block content %}
+<div id="content-main">
+	<form method="POST">
+		{% csrf_token %}
+		<fieldset class="module aligned">
+			<div class="form-row">
+				<label>Skills:</label>
+				<textarea id="{{ form.content.id }}" name="{{ form.content.name }}" class="vLargeTextField"
+					cols="40" rows="10"></textarea>
+				<div class="help">Enter one skill per line</div>
+			</div>
+		</fieldset>
+		<div class="submit-row"><input type="submit" value="Save" class="default" name="_save"></div>
+	</form>
+</div>
+{% endblock %}

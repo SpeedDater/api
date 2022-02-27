@@ -1,0 +1,36 @@
+{% extends 'admin/base_site.html' %}
+{% load static %}
+
+{% block extrastyle %}{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/forms.css' %}">
+{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+	<a href="{% url 'admin:index' %}">Home</a>
+	&rsaquo; <a href="{% url 'admin:app_list' app_label='auth' %}">Authentication and Authorization</a>
+	&rsaquo; <a href="{% url 'admin:auth_user_changelist' %}">Users</a>
+	&rsaquo; Add staff account
+</div>
+{% endblock %}
+
+{% block content %}
+<div id="content-main">
+	{% if form.errors %}
+	<p class="errornote">Please correct the error below.</p>
+	{% endif %}
+	<form method="POST">
+		{% csrf_token %}
+		<fieldset class="module aligned">
+			{% for field in form %}
+			<div class="form-row {% if field.errors %}errors{% endif %}">
+				{{ field.errors }}
+				<label for="{{ field.id_for_label }}" {% if field.field.required %}class="required"{% endif %}>{{ field.label }}:</label>
+				<input class="vTextField" name="{{ field.name }}" id="{{ field.id_for_label }}" {% if field.field.required %}required{% endif %}>
+			</div>
+			{% endfor %}
+		</fieldset>
+		<div class="submit-row"><input type="submit" value="Save" class="default" name="_save"></div>
+	</form>
+</div>
+{% endblock %}
