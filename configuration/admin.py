@@ -38,12 +38,12 @@ class SectionTimeAdmin(admin.ModelAdmin):
 @admin.register(Major)
 class MajorAdmin(admin.ModelAdmin):
 	change_list_template = 'admin/configuration/change_list_major.html'
-	search_fields = ['majors']
+	search_fields = ['major']
 	ordering = ['major']
 
 
 @admin.register(Skill)
 class SkillAdmin(admin.ModelAdmin):
 	change_list_template = 'admin/configuration/change_list_skill.html'
-	search_fields = ['skills']
+	search_fields = ['skill']
 	ordering = ['skill']
