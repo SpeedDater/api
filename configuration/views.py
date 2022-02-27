@@ -48,30 +48,31 @@ class UserViewSet(viewsets.ModelViewSet):
 
 @method_decorator(staff_member_required(), name='dispatch')
 class AddStaffView(FormView):
-    "A view for admins to add staff user accounts."
-    form_class = AddStaffForm
-    success_url = reverse_lazy('admin:auth_user_changelist')
-    template_name = 'add_staff.html'
+	"A view for admins to add staff user accounts."
+	form_class = AddStaffForm
+	success_url = reverse_lazy('admin:auth_user_changelist')
+	template_name = 'add_staff.html'
 
-    def form_valid(self, form):
-        email = form.cleaned_data['email']
-        first_name = form.cleaned_data['first_name']
-        last_name = form.cleaned_data['last_name']
-        # derive username from email address
-        username = email.split('@')[0]
-        # remove existing user
-        try:
-            user = User.objects.get(email=email)
-            user.delete()
-        except user.DoesNotExist:
-            pass
-        # build new user object
-        user = User(username=username, email=email, first_name=first_name, last_name=last_name)
-        user.is_staff = True
-        user.is_superuser = True
-        user.set_unusable_password()
-        user.save()
-        return super().form_valid(form)
+	def form_valid(self, form):
+		email = form.cleaned_data['email']
+		first_name = form.cleaned_data['first_name']
+		last_name = form.cleaned_data['last_name']
+
+		# check for existing user with same email
+		try:
+			user = User.objects.get(email=email)
+		except User.DoesNotExist:
+			user = User()
+
+		# build user object
+		user.username = email
+		user.email = email
+		user.first_name = first_name
+		user.last_name = last_name
+		user.is_staff = True
+		user.is_superuser = True
+		user.save()
+		return super().form_valid(form)
 
 
 @method_decorator(staff_member_required(), name='dispatch')
