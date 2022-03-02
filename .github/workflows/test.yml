@@ -11,6 +11,7 @@ jobs:
       matrix:
         python-version: ['3.8', '3.9', '3.10']
     env:
+      TRUSTED_ORIGINS: 'http://localhost:8000'
       SECRET_KEY: insecure_github_actions_secret
     steps:
     - uses: actions/checkout@v2
@@ -30,6 +31,3 @@ jobs:
     - name: Run tests
       run: |
         python3 -Wa manage.py test
-        gunicorn api.wsgi:application -b 127.0.0.1:8000 &
-        sleep 3
-        curl -Lf localhost:8000
