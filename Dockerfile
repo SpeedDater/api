@@ -16,4 +16,4 @@ USER nobody
 
 CMD python3 manage.py collectstatic --noinput && \
     python3 manage.py migrate --run-syncdb && \
-    gunicorn api.wsgi:application -b 0.0.0.0:8000
+    gunicorn speeddater_api.wsgi:application -b 0.0.0.0:8000

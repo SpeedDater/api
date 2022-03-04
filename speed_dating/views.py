@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 from rest_framework.exceptions import PermissionDenied
-from api import permissions
+from speeddater_api import permissions
 from speed_dating.models import Profile
 from speed_dating.serializers import ProfileSerializer
 

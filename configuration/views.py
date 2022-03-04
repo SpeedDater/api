@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from rest_framework import viewsets
-from api import permissions
+from speeddater_api import permissions
 from configuration.forms import *
 from configuration.models import *
 from configuration.serializers import *
