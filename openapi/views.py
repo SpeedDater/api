@@ -4,7 +4,6 @@ from django.utils.decorators import method_decorator
 from django.views.generic.base import TemplateView
 
 
-@method_decorator(login_required(), name='dispatch')
 class SwaggerUIView(TemplateView):
     """
     View that presets the OpenAPI docs in Swagger UI
