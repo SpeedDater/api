@@ -18,12 +18,14 @@ from django.urls import path, include
 from rest_framework.permissions import AllowAny
 from rest_framework.schemas import get_schema_view
 from openapi import views
+from openapi.schema_generator import SpeedDaterSchemaGenerator
 
 app_name = 'openapi'
 
 urlpatterns = [
 	path('openapi', get_schema_view(title=settings.APP_NAME,
 									version=settings.APP_VERSION,
+									generator_class=SpeedDaterSchemaGenerator,
 									permission_classes=[AllowAny],
 									public=True), name='schema'),
 	path('api-docs/', views.SwaggerUIView.as_view(), name='swagger'),

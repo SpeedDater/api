@@ -196,6 +196,10 @@ SOCIAL_AUTH_PIPELINE = (
 # Django REST Framework
 
 REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'speeddater_api.authentication.BearerAuthentication',
+    ],
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
     ),
