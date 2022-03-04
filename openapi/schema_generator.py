@@ -13,4 +13,7 @@ class SpeedDaterSchemaGenerator(SchemaGenerator):
 				"scheme": "bearer"
 			}
 		}
+		schema["security"] = [
+			{"Bearer": []},
+		]
 		return schema
