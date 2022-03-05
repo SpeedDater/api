@@ -181,6 +181,18 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_PASSWORD_MIN_LENGTH = 8
 SOCIALACCOUNT_ADAPTER = "speeddater_api.authentication.SocialAccountEmailAsUsername"
+try:
+    SOCIALACCOUNT_PROVIDERS = {
+        'google': {
+            'APP': {
+                'client_id': environ['GOOGLE_OAUTH_CLIENT_ID'],
+                'secret': environ['GOOGLE_OAUTH_CLIENT_SECRET'],
+                'key': '' # not needed for Google
+            }
+        }
+    }
+except KeyError:
+    pass
 
 # Django REST Framework
 
