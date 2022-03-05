@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
     'django.contrib.staticfiles',
     # DRF modules
     'rest_framework',
@@ -73,6 +74,14 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     # django-cors module
     'corsheaders',
+    # django-allauth modules
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    # dj-rest-auth modules
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
 ]
 
 MIDDLEWARE = [
@@ -162,6 +171,11 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # https://docs.djangoproject.com/en/4.0/ref/settings/#login-url
 
 LOGIN_REDIRECT_URL = '/'
+
+# django-allauth and dj-rest-auth
+# https://dj-rest-auth.readthedocs.io/en/latest/installation.html
+
+SITE_ID = 1
 
 # Django REST Framework
 

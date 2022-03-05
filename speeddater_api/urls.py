@@ -18,6 +18,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
+from speeddater_api.authentication import GoogleLoginView
 import configuration.views
 import speed_dating.views
 
@@ -33,6 +34,10 @@ urlpatterns = [
     path('', include(router.urls)),
     # Django authentication
     path('accounts/', include('django.contrib.auth.urls')),
+    # dj-rest-auth
+    path('accounts/rest-auth/', include('dj_rest_auth.urls')),
+    path('accounts/rest-auth/registration/', include('dj_rest_auth.registration.urls')),
+    path('accounts/rest-auth/google/', GoogleLoginView.as_view(), name='google_login'),
     # Extra admin pages
     path('admin/', include('admin_pages.urls', namespace="admin_pages")),
     # Django admin
