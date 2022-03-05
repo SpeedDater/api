@@ -15,41 +15,6 @@ def add_admin_context(context):
 
 
 @method_decorator(staff_member_required(), name='dispatch')
-class AddStaffView(FormView):
-    "A view for admins to add staff user accounts."
-    form_class = AddStaffForm
-    success_url = reverse_lazy('admin:auth_user_changelist')
-    template_name = 'add_staff.html'
-
-    def form_valid(self, form):
-        email = form.cleaned_data['email']
-        first_name = form.cleaned_data['first_name']
-        last_name = form.cleaned_data['last_name']
-
-        # check for existing user with same email
-        try:
-            user = User.objects.get(email=email)
-        except User.DoesNotExist:
-            user = User()
-
-        # build user object
-        user.username = email
-        user.email = email
-        user.first_name = first_name
-        user.last_name = last_name
-        user.is_staff = True
-        user.is_superuser = True
-        user.save()
-        return super().form_valid(form)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Add staff account'
-        add_admin_context(context)
-        return context
-
-
-@method_decorator(staff_member_required(), name='dispatch')
 class MajorBulkUpdateView(FormView):
     """
     A view for admins to bulk import majors.

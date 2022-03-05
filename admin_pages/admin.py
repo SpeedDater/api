@@ -14,10 +14,21 @@ admin.site.unregister(User)
 
 @admin.register(User)
 class UserAdminWithActions(UserAdmin):
-	actions = ['remove_password']
+	actions = ['disable_password_login', 'grant_staff_privileges', 'remove_staff_privileges']
 
-	def remove_password(modeladmin, request, queryset):
+	def disable_password_login(modeladmin, request, queryset):
 		for u in queryset:
 			u.set_unusable_password()
 			u.save()
-	remove_password.short_description = "Remove password"
+
+	def grant_staff_privileges(modeladmin, request, queryset):
+		for u in queryset:
+			u.is_staff = True
+			u.is_superuser = True
+			u.save()
+	
+	def remove_staff_privileges(modeladmin, request, queryset):
+		for u in queryset:
+			u.is_staff = False
+			u.is_superuser = False
+			u.save()

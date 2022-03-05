@@ -19,7 +19,6 @@ from admin_pages import views
 app_name = 'admin_pages'
 
 urlpatterns = [
-    path('auth/user/add-staff/', views.AddStaffView.as_view(), name="add_staff"),
     path('configuration/major/bulk-import/', views.MajorBulkUpdateView.as_view(),
          name="bulk_import_major"),
     path('configuration/skill/bulk-import/', views.SkillBulkUpdateView.as_view(),
