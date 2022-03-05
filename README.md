@@ -6,13 +6,14 @@ REST API for SpeedDater407, powered by Django REST Framework.
 
 Configuration is handled via environment variables.
 
-| Environment variable         | Description                                                           | Required?                        |
-| ---------------------------- | --------------------------------------------------------------------- | -------------------------------- |
-| `DEBUG`                      | Set to `True` to enable Django debug mode                             | **No**                           |
-| `GOOGLE_OAUTH_CLIENT_ID`     | Google OAuth2 Client ID                                               | **Yes**, if using Google sign-in |
-| `GOOGLE_OAUTH_CLIENT_SECRET` | Google OAuth2 Client Secret                                           | **Yes**, if using Google sign-in |
-| `SECRET_KEY`                 | Django secret key. Leave blank to use a randomly-generated one.       | **No**                           |
-| `TRUSTED_ORIGINS`            | List of trusted origins. Format: comma-seperated `scheme://host:port` | **Yes**, unless DEBUG is enabled |
+| Environment variable         | Description                                                                | Required?                        |
+| ---------------------------- | -------------------------------------------------------------------------- | -------------------------------- |
+| `CORS_ALLOWED_ORIGINS`       | List of CORS allowed origins. Format: comma-seperated `scheme://host:port` | **No**                           |
+| `DEBUG`                      | Set to `True` to enable Django debug mode                                  | **No**                           |
+| `GOOGLE_OAUTH_CLIENT_ID`     | Google OAuth2 Client ID                                                    | **Yes**, if using Google sign-in |
+| `GOOGLE_OAUTH_CLIENT_SECRET` | Google OAuth2 Client Secret                                                | **Yes**, if using Google sign-in |
+| `SECRET_KEY`                 | Django secret key. Leave blank to use a randomly-generated one.            | **No**                           |
+| `TRUSTED_ORIGINS`            | List of trusted origins. Format: comma-seperated `scheme://host:port`      | **Yes**, unless DEBUG is enabled |
 
 ## Authentication
 

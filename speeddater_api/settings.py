@@ -71,12 +71,15 @@ INSTALLED_APPS = [
     'speed_dating',
     # Django admin module
     'django.contrib.admin',
+    # django-cors module
+    "corsheaders",
     # python-social-auth modules
     'social_django',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -209,3 +212,10 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 20,
 }
+
+# set CORS header from environment variables
+
+try:
+    CORS_ALLOWED_ORIGINS = environ.get('CORS_ALLOWED_ORIGINS').split(',')
+except KeyError:
+    pass
