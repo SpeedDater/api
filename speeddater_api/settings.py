@@ -176,6 +176,11 @@ LOGIN_REDIRECT_URL = '/'
 # https://dj-rest-auth.readthedocs.io/en/latest/installation.html
 
 SITE_ID = 1
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_PASSWORD_MIN_LENGTH = 8
+SOCIALACCOUNT_ADAPTER = "speeddater_api.authentication.SocialAccountEmailAsUsername"
 
 # Django REST Framework
 
