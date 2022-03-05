@@ -2,7 +2,6 @@ from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
 from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from dj_rest_auth.registration.views import SocialLoginView
-from rest_framework.authentication import TokenAuthentication
 
 
 class GoogleLoginView(SocialLoginView):
@@ -22,10 +21,3 @@ class SocialAccountEmailAsUsername(DefaultSocialAccountAdapter):
 		user = super().populate_user(request, sociallogin, data)
 		user.username = user.email
 		return user
-
-
-class BearerAuthentication(TokenAuthentication):
-	"""
-	A token-based authenticator that uses the standard "Authorization: Bearer" header
-	"""
-	keyword = "Bearer"

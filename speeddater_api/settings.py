@@ -180,7 +180,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_PASSWORD_MIN_LENGTH = 8
-SOCIALACCOUNT_ADAPTER = "speeddater_api.authentication.SocialAccountEmailAsUsername"
+SOCIALACCOUNT_ADAPTER = "speeddater_api.social_account.SocialAccountEmailAsUsername"
 try:
     SOCIALACCOUNT_PROVIDERS = {
         'google': {
@@ -199,7 +199,7 @@ except KeyError:
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
-        'speeddater_api.authentication.BearerAuthentication',
+        'speeddater_api.drf_authentication.BearerAuthentication',
     ],
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
