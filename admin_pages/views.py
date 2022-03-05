@@ -3,7 +3,7 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import FormView
+from django.views.generic import FormView, RedirectView
 from configuration.forms import *
 from configuration.models import *
 
@@ -12,6 +12,11 @@ def add_admin_context(context):
     context['site_header'] = settings.APP_NAME
     context['site_url'] = '/'
     context['has_permission'] = True
+
+
+class AdminLogoutRedirectView(RedirectView):
+    query_string = True
+    pattern_name = 'account_logout'
 
 
 @method_decorator(staff_member_required(), name='dispatch')

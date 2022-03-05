@@ -19,6 +19,7 @@ from admin_pages import views
 app_name = 'admin_pages'
 
 urlpatterns = [
+    path('logout/', views.AdminLogoutRedirectView.as_view()),
     path('configuration/major/bulk-import/', views.MajorBulkUpdateView.as_view(),
          name="bulk_import_major"),
     path('configuration/skill/bulk-import/', views.SkillBulkUpdateView.as_view(),

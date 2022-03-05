@@ -33,11 +33,10 @@ urlpatterns = [
     # API endpoints
     path('', include(router.urls)),
     # Django authentication
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/', include('allauth.urls')),
     # dj-rest-auth
     path('accounts/rest-auth/', include('dj_rest_auth.urls')),
-    path('accounts/rest-auth/registration/', include('dj_rest_auth.registration.urls')),
-    path('accounts/rest-auth/google/', GoogleLoginView.as_view(), name='google_login'),
+    path('accounts/rest-auth/google/', GoogleLoginView.as_view()),
     # Extra admin pages
     path('admin/', include('admin_pages.urls', namespace="admin_pages")),
     # Django admin

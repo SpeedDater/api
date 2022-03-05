@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load account socialaccount %}
+{% block title %}Log in{% endblock %}
+{% block body %}
+<h2>Log In</h2>
+{% block extra %}{% endblock %}
+{% get_providers as socialaccount_providers %}
+{% if socialaccount_providers %}
+<h3>Identity Providers</h3>
+<ul>
+  {% for provider in socialaccount_providers %}
+  <li>
+    <a title="{{provider.name}}"
+       href="{% provider_login_url provider.id process='login' %}">{{provider.name}}</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+<h3>Username/Password</h3>
+<form method="POST">
+  {% csrf_token %}
+  {{ form.as_p }}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <p><a href="{% url 'account_reset_password' %}">Forgot Password?</a></p>
+  <p><button type="submit">Log In</button></p>
+</form>
+{% endblock %}

@@ -181,6 +181,7 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_PASSWORD_MIN_LENGTH = 8
 SOCIALACCOUNT_ADAPTER = "speeddater_api.social_account.SocialAccountEmailAsUsername"
+SOCIALACCOUNT_LOGIN_ON_GET = True
 try:
     SOCIALACCOUNT_PROVIDERS = {
         'google': {

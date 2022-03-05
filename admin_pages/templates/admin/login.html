@@ -1,4 +1,4 @@
-{% extends 'registration/login.html' %}
+{% extends 'account/login.html' %}
 {% block extra %}
 {% if user.is_authenticated %}
 <p class="error">You're logged in as <strong>{{ username }}</strong>, but you're not authorized to access this page. Would you like to login to a different account?</p>
