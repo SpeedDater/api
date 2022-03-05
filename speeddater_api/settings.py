@@ -183,6 +183,6 @@ REST_FRAMEWORK = {
 # set CORS header from environment variables
 
 try:
-    CORS_ALLOWED_ORIGINS = environ.get('CORS_ALLOWED_ORIGINS').split(',')
+    CORS_ALLOWED_ORIGINS = environ['CORS_ALLOWED_ORIGINS'].split(',')
 except KeyError:
     pass
