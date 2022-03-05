@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>OAuth Step 2</title>
+</head>
+<body>
+	<h1>OAuth Step 2</h1>
+	<p><button onclick="continue_auth()" id="btn">Continue auth</button></p>
+	<script>
+		function continue_auth() {
+			// get query string
+			const queryString = window.location.search;
+			// parse query string & get oauth code
+			const urlParams = new URLSearchParams(queryString);
+			const code = urlParams.get('code');
+			// send code to API
+			const data = {
+				code: code
+			};
+			const response = fetch('/accounts/rest-auth/google/', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-CSRFToken': '{{ csrf_token }}'
+				},
+				redirect: 'follow',
+				body: JSON.stringify(data) // body data type must match "Content-Type" header
+			});
+
+			var btn = document.getElementById('btn');
+			btn.innerHTML = 'Go to Admin Panel';
+			btn.onclick = function () {
+				window.location.href = '/admin/';
+			}
+		}
+	</script>
+</body>
+</html>

@@ -72,6 +72,7 @@ INSTALLED_APPS = [
     # our apps
     'admin_pages',
     'configuration',
+    'frontend_test',
     'openapi',
     'speed_dating',
     'teams',
