@@ -33,8 +33,6 @@ urlpatterns = [
     path('', include(router.urls)),
     # Django authentication
     path('accounts/', include('django.contrib.auth.urls')),
-    # python-social-auth
-    path('accounts/social/', include('social_django.urls', namespace='social')),
     # Extra admin pages
     path('admin/', include('admin_pages.urls', namespace="admin_pages")),
     # Django admin

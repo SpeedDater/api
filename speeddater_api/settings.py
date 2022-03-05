@@ -72,9 +72,7 @@ INSTALLED_APPS = [
     # Django admin module
     'django.contrib.admin',
     # django-cors module
-    "corsheaders",
-    # python-social-auth modules
-    'social_django',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -102,14 +100,12 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'social_django.context_processors.backends',
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'speeddater_api.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
@@ -121,14 +117,12 @@ DATABASES = {
     }
 }
 
-
 # Authentication backends
 # https://docs.djangoproject.com/en/4.0/ref/settings/#authentication-backends
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -139,7 +133,6 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
@@ -169,32 +162,6 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # https://docs.djangoproject.com/en/4.0/ref/settings/#login-url
 
 LOGIN_REDIRECT_URL = '/'
-
-# python-social-auth provider config
-
-SOCIAL_AUTH_URL_NAMESPACE = 'social'
-SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
-try:
-    SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = environ['GOOGLE_OAUTH_CLIENT_ID']
-    SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = environ['GOOGLE_OAUTH_CLIENT_SECRET']
-    # enable Google OAuth support if client creds are configured
-    AUTHENTICATION_BACKENDS.append('social_core.backends.google.GoogleOAuth2')
-except KeyError:
-    pass
-
-# associate user by email
-SOCIAL_AUTH_PIPELINE = (
-    'social_core.pipeline.social_auth.social_details',
-    'social_core.pipeline.social_auth.social_uid',
-    'social_core.pipeline.social_auth.auth_allowed',
-    'social_core.pipeline.social_auth.social_user',
-    'social_core.pipeline.user.get_username',
-    'social_core.pipeline.social_auth.associate_by_email',
-    'social_core.pipeline.user.create_user',
-    'social_core.pipeline.social_auth.associate_user',
-    'social_core.pipeline.social_auth.load_extra_data',
-    'social_core.pipeline.user.user_details',
-)
 
 # Django REST Framework
 
