@@ -34,10 +34,10 @@ urlpatterns = [
     # API endpoints
     path('', include(router.urls)),
     # django-allauth (using a subset of its urls)
-    path('accounts/', include('speeddater_api.allauth.urls')),
+    path('auth/', include('speeddater_api.allauth.urls')),
     # dj-rest-auth
-    path('accounts/rest-auth/', include('dj_rest_auth.urls')),
-    path('accounts/rest-auth/google/', GoogleLoginView.as_view()),
+    path('rest-auth/', include('dj_rest_auth.urls')),
+    path('rest-auth/google/', GoogleLoginView.as_view()),
     # Extra admin pages
     path('admin/', include('admin_pages.urls', namespace="admin_pages")),
     # Django admin
