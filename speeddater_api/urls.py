@@ -1,4 +1,4 @@
-"""api URL Configuration
+'''api URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.0/topics/http/urls/
@@ -12,7 +12,7 @@ Class-based views
 Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
+'''
 from allauth.account import views as allauth_views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -37,11 +37,12 @@ urlpatterns = [
     path('auth/', include('speeddater_api.allauth.urls')),
     # dj-rest-auth
     path('rest-auth/', include('speeddater_api.allauth.restauth_urls')),
-    path('rest-auth/google/login/', GoogleLoginView.as_view()),
+    path('rest-auth/google/login/', GoogleLoginView.as_view(),
+         name='rest_login_google'),
     # Extra admin pages
-    path('admin/', include('admin_pages.urls', namespace="admin_pages")),
+    path('admin/', include('admin_pages.urls', namespace='admin_pages')),
     # Django admin
     path('admin/', admin.site.urls),
     # OpenAPI and Swagger UI
-    path('', include('openapi.urls', namespace="openapi")),
+    path('', include('openapi.urls', namespace='openapi')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

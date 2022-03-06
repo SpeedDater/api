@@ -6,14 +6,14 @@ from django.views.generic import View
 
 
 class GoogleLoginView(SocialLoginView):
-	"""
-	A view for handling Google OAuth2 login
-	"""
-	adapter_class = GoogleOAuth2Adapter
-	client_class = OAuth2Client
-	callback_url = 'http://127.0.0.1:8000/oauth/step2/'
+    '''
+    A view for handling Google OAuth2 login
+    '''
+    adapter_class = GoogleOAuth2Adapter
+    client_class = OAuth2Client
+    callback_url = 'http://127.0.0.1:8000/oauth/step2/'
 
 
 class PageNotFoundView(View):
-	def get(self, request):
-		raise Http404
+    def get(self, request):
+        raise Http404

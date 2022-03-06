@@ -1,4 +1,4 @@
-"""admin_pages URL Configuration
+'''admin_pages URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.0/topics/http/urls/
@@ -12,7 +12,7 @@ Class-based views
 Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
+'''
 from django.urls import path, include
 from admin_pages import views
 
@@ -20,8 +20,8 @@ app_name = 'admin_pages'
 
 urlpatterns = [
     path('logout/', views.AdminLogoutRedirectView.as_view()),
-    path('configuration/major/bulk-import/', views.MajorBulkUpdateView.as_view(),
-         name="bulk_import_major"),
-    path('configuration/skill/bulk-import/', views.SkillBulkUpdateView.as_view(),
-         name="bulk_import_skill"),
+    path('configuration/major/bulk-import/',
+         views.MajorBulkUpdateView.as_view(), name='bulk_import_major'),
+    path('configuration/skill/bulk-import/',
+         views.SkillBulkUpdateView.as_view(), name='bulk_import_skill'),
 ]

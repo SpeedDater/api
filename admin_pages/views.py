@@ -21,9 +21,9 @@ class AdminLogoutRedirectView(RedirectView):
 
 @method_decorator(staff_member_required(), name='dispatch')
 class MajorBulkUpdateView(FormView):
-    """
-    A view for admins to bulk import majors.
-    """
+    '''
+    Bulk import majors from the Admin Panel
+    '''
     form_class = BulkUpdateForm
     success_url = reverse_lazy('admin:configuration_major_changelist')
     template_name = 'bulk_import_majors.html'
@@ -45,9 +45,9 @@ class MajorBulkUpdateView(FormView):
 
 @method_decorator(staff_member_required(), name='dispatch')
 class SkillBulkUpdateView(FormView):
-    """
-    A view for admins to bulk import skills.
-    """
+    '''
+    Bulk import skills from the Admin Panel
+    '''
     form_class = BulkUpdateForm
     success_url = reverse_lazy('admin:configuration_skill_changelist')
     template_name = 'bulk_import_skills.html'
