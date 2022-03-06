@@ -4,9 +4,11 @@ from allauth import app_settings
 from allauth.account import views as account_views
 from allauth.socialaccount import views as social_views
 from allauth.socialaccount import providers
+from speeddater_api.allauth.views import PageNotFoundView
 
 # taken from allauth/account/urls.py, without signup and password-related stuff
 urlpatterns = [
+    path("signup/", PageNotFoundView.as_view(), name="account_signup"),
     path("login/", account_views.login, name="account_login"),
     path("logout/", account_views.logout, name="account_logout"),
     path("inactive/", account_views.account_inactive, name="account_inactive"),
@@ -17,7 +19,6 @@ if app_settings.SOCIALACCOUNT_ENABLED:
 	urlpatterns += [
 		path("login/cancelled/", social_views.login_cancelled, name="socialaccount_login_cancelled"),
 		path("login/error/", social_views.login_error, name="socialaccount_login_error"),
-		path("connections/", social_views.connections, name="socialaccount_connections"),
 	]
 
 # directly taken from allauth/urls.py

@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Login Cancelled{% endblock %}
+{% block body %}
+<h2>Login Cancelled</h2>
+<p>You've cancelled the login process. If this was a mistake, please <a href="{% url 'account_login' %}">sign in again</a>.</p>
+{% endblock %}
