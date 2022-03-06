@@ -4,7 +4,7 @@ from rest_framework.schemas.openapi import SchemaGenerator
 
 class SpeedDaterSchemaGenerator(SchemaGenerator):
     '''
-    A standard OpenAPI schema with Bearer authentication added
+    Generate standard OpenAPI schema with Bearer authentication and some extra info
     '''
 
     def get_schema(self, *args, **kwargs):

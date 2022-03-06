@@ -13,7 +13,7 @@ class MajorViewSet(viewsets.ModelViewSet):
     '''
     View and edit choices of majors.
     - All authenticated users may view (GET) majors.
-    - Staff can add (POST), change (PUT/PATCH), and delete (DELETE) majors.
+    - Staff can also add (POST), change (PUT/PATCH), and delete (DELETE) majors.
     '''
     queryset = Major.objects.all().order_by('major')
     serializer_class = MajorSerializer
@@ -24,7 +24,8 @@ class SectionTimeViewSet(viewsets.ModelViewSet):
     '''
     View and edit choices of section times.
     - All authenticated users may view (GET) section times.
-    - Staff can add (POST), change (PUT/PATCH), and delete (DELETE) section times.
+    - Staff can also add (POST), change (PUT/PATCH), and delete (DELETE) section
+      times.
     '''
     queryset = SectionTime.objects.all().order_by('start')
     serializer_class = SectionTimeSerializer
@@ -35,7 +36,7 @@ class SkillViewSet(viewsets.ModelViewSet):
     '''
     View and edit choices of skills.
     - All authenticated users may view (GET) skills.
-    - Staff can add (POST), change (PUT/PATCH), and delete (DELETE) skills.
+    - Staff can also add (POST), change (PUT/PATCH), and delete (DELETE) skills.
     '''
     queryset = Skill.objects.all().order_by('skill')
     serializer_class = SkillSerializer
