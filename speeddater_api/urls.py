@@ -36,8 +36,8 @@ urlpatterns = [
     # django-allauth (using a subset of its urls)
     path('auth/', include('speeddater_api.allauth.urls')),
     # dj-rest-auth
-    path('rest-auth/', include('dj_rest_auth.urls')),
-    path('rest-auth/google/', GoogleLoginView.as_view()),
+    path('rest-auth/', include('speeddater_api.allauth.restauth_urls')),
+    path('rest-auth/google/login/', GoogleLoginView.as_view()),
     # Extra admin pages
     path('admin/', include('admin_pages.urls', namespace="admin_pages")),
     # Django admin
