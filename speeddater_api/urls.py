@@ -18,7 +18,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from speeddater_api.social_account import GoogleLoginView
+from speeddater_api.allauth.views import GoogleLoginView
 import configuration.views
 import speed_dating.views
 
