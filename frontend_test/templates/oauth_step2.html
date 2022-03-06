@@ -8,34 +8,39 @@
 </head>
 <body>
 	<h1>OAuth Step 2</h1>
-	<p><button onclick="continue_auth()" id="btn">Continue auth</button></p>
+	<p id="auth-action">Authenticating...</p>
 	<script>
-		function continue_auth() {
-			// get query string
-			const queryString = window.location.search;
-			// parse query string & get oauth code
-			const urlParams = new URLSearchParams(queryString);
-			const code = urlParams.get('code');
-			// send code to API
-			const data = {
-				code: code
-			};
-			const response = fetch('/accounts/rest-auth/google/', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					'X-CSRFToken': '{{ csrf_token }}'
-				},
-				redirect: 'follow',
-				body: JSON.stringify(data) // body data type must match "Content-Type" header
-			});
-
-			var btn = document.getElementById('btn');
-			btn.innerHTML = 'Go to Admin Panel';
-			btn.onclick = function () {
-				window.location.href = '/admin/';
+		const action = document.getElementById('auth-action');
+		// get query string
+		const queryString = window.location.search;
+		// parse query string & get oauth code
+		const urlParams = new URLSearchParams(queryString);
+		const code = urlParams.get('code');
+		// send code to API
+		const data = {
+			code: code
+		};
+		fetch('/rest-auth/google/login/', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-CSRFToken': '{{ csrf_token }}'
+			},
+			redirect: 'follow',
+			body: JSON.stringify(data)
+		})
+		.then(response => {
+			if (response.ok) {
+				// authentication is successful, store token
+				response.json().then(function storeToken(json) {
+					document.cookie = 'token=' + json['key'] + ";path=/";
+				});
+				action.innerHTML = '<a href="/admin/">Go to Admin Panel</a>';
+			} else {
+				// auth failed
+				action.innerHTML = 'An error occurred... Please <a href="/oauth/step1/">start over</a>';
 			}
-		}
+		});
 	</script>
 </body>
 </html>

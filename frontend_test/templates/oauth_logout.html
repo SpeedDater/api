@@ -8,14 +8,17 @@
 </head>
 <body>
 	<h1>OAuth Logout</h1>
+	<p id="msg">Logging you out...</p>
 	<script>
-		fetch('/accounts/rest-auth/logout/', {
+		fetch('/rest-auth/logout/', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 				'X-CSRFToken': '{{ csrf_token }}'
 			},
 		});
+		document.cookie = 'token=;path=/';
+		document.getElementById("msg").innerHTML = "You've been logged out.";
 	</script>
 </body>
 </html>
