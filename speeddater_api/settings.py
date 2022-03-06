@@ -219,7 +219,7 @@ except KeyError:
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        # use Django default session auth and DRF token auth (with Bearer header)
+        # use Django session auth and DRF token auth (Bearer header)
         'rest_framework.authentication.SessionAuthentication',
         'speeddater_api.drf_authentication.BearerAuthentication',
     ],
