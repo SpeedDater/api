@@ -14,6 +14,7 @@ from django.core.management.utils import get_random_secret_key
 from os import environ
 from os.path import join
 from pathlib import Path
+from speeddater_api.helpers import bcolors
 
 # Application NAME and VERSION
 APP_NAME = 'SpeedDater'
@@ -32,17 +33,17 @@ except KeyError:
     SECRET_KEY = get_random_secret_key()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# Try to set DEBUG from environment variable
-DEBUG = False
+# set DEBUG from environment variable. default to False
 try:
     DEBUG = (environ['DEBUG'].lower() == 'true')
+    print(f"{bcolors.WARNING}{bcolors.BOLD}***DEBUG is enabled!***{bcolors.ENDC}")
 except KeyError:
-    pass
+    DEBUG = False
 
 try:
     CSRF_TRUSTED_ORIGINS = environ['TRUSTED_ORIGINS'].split(',')
     # build ALLOWED_HOSTS based on CSRF_TRUSTED_ORIGINS
-    ALLOWED_HOSTS = [] 
+    ALLOWED_HOSTS = []
     for host in CSRF_TRUSTED_ORIGINS:
         # strip http:// and https://
         host = host.replace('http://', '').replace('https://', '')
@@ -50,7 +51,10 @@ try:
         host = host.split(':')[0]
         ALLOWED_HOSTS.append(host)
 except KeyError:
-    pass
+    if not DEBUG:
+        print(
+            f"{bcolors.FAIL}{bcolors.BOLD}ERROR: You must configure TRUSTED_ORIGINS!{bcolors.ENDC}")
+        exit(1)
 
 # Application definition
 
@@ -199,21 +203,27 @@ except KeyError:
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
+        # use Django default session auth and DRF token auth (with Bearer header)
         'rest_framework.authentication.SessionAuthentication',
         'speeddater_api.drf_authentication.BearerAuthentication',
     ],
     'DEFAULT_RENDERER_CLASSES': (
+        # only render as JSON
         'rest_framework.renderers.JSONRenderer',
     ),
     'DEFAULT_PERMISSION_CLASSES': [
+        # require auth for all API endpoints by default
         'rest_framework.permissions.IsAuthenticated'
     ],
+    # default to 20 items per page
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 20,
 }
 
-# set CORS header from environment variables
+# django-cors-headers
+# https://github.com/adamchainz/django-cors-headers#configuration
 
+# set CORS header from environment variables
 try:
     CORS_ALLOWED_ORIGINS = environ['CORS_ALLOWED_ORIGINS'].split(',')
 except KeyError:
