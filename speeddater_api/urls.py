@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from allauth.account import views as allauth_views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -32,8 +33,8 @@ router.register('users', configuration.views.UserViewSet)
 urlpatterns = [
     # API endpoints
     path('', include(router.urls)),
-    # Django authentication
-    path('accounts/', include('allauth.urls')),
+    # django-allauth (using a subset of its urls)
+    path('accounts/', include('speeddater_api.allauth.urls')),
     # dj-rest-auth
     path('accounts/rest-auth/', include('dj_rest_auth.urls')),
     path('accounts/rest-auth/google/', GoogleLoginView.as_view()),
