@@ -121,12 +121,27 @@ WSGI_APPLICATION = 'speeddater_api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# configure database from environment variable
+try:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.' + environ['DATABASE_TYPE'],
+            'NAME': environ['DATABASE_NAME'],
+            'HOST': environ.get('DATABASE_HOST'),
+            'PORT': environ.get('DATABASE_PORT'),
+            'USER': environ.get('DATABASE_USERNAME'),
+            'PASSWORD': environ.get('DATABASE_PASSWORD'),
+        }
     }
-}
+except KeyError:
+    # use default if DB isn't configured
+    print(f"{bcolors.WARNING}Database is not configured! Continuing with default database settings...{bcolors.ENDC}")
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'db.sqlite3',
+        }
+    }
 
 # Authentication backends
 # https://docs.djangoproject.com/en/4.0/ref/settings/#authentication-backends

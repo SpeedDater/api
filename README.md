@@ -1,19 +1,25 @@
-# SpeedDater407 API
+# SpeedDater API
 
-REST API for SpeedDater407, powered by Django REST Framework.
+REST API for SpeedDater, powered by Django REST Framework.
 
 ## Configuration
 
 Configuration is handled via environment variables.
 
-| Environment variable         | Description                                                                | Required?                        |
-| ---------------------------- | -------------------------------------------------------------------------- | -------------------------------- |
-| `CORS_ALLOWED_ORIGINS`       | List of CORS allowed origins. Format: comma-seperated `scheme://host:port` | **No**                           |
-| `DEBUG`                      | Set to `True` to enable Django debug mode                                  | **No**                           |
-| `GOOGLE_OAUTH_CLIENT_ID`     | Google OAuth2 Client ID                                                    | **Yes**, if using Google sign-in |
-| `GOOGLE_OAUTH_CLIENT_SECRET` | Google OAuth2 Client Secret                                                | **Yes**, if using Google sign-in |
-| `SECRET_KEY`                 | Django secret key. Leave blank to use a randomly-generated one.            | **No**                           |
-| `TRUSTED_ORIGINS`            | List of trusted origins. Format: comma-seperated `scheme://host:port`      | **Yes**, unless DEBUG is enabled |
+| Environment variable         | Description                                                                | Default                                      |
+| ---------------------------- | -------------------------------------------------------------------------- | -------------------------------------------- |
+| `CORS_ALLOWED_ORIGINS`       | List of CORS allowed origins. Format: comma-seperated `scheme://host:port` | *blank* (no CORS header unless configured)   |
+| `DATABASE_TYPE`              | Database type. `sqlite3` or `postgresql`                                   | `sqlite3`                                    |
+| `DATABASE_NAME`              | Database name. If using SQLite, path to file.                              | `db.sqlite3`                                 |
+| `DATABASE_HOST`              | Database hostname.                                                         | *blank*                                      |
+| `DATABASE_PORT`              | Database port number.                                                      | *blank*                                      |
+| `DATABASE_USERNAME`          | Database server username.                                                  | *blank*                                      |
+| `DATABASE_PASSWORD`          | Database server password.                                                  | *blank*                                      |
+| `DEBUG`                      | Set to `True` to enable Django debug mode                                  | `False`                                      |
+| `GOOGLE_OAUTH_CLIENT_ID`     | Google OAuth2 Client ID.                                                   | *blank* (No Google auth unless configured)   |
+| `GOOGLE_OAUTH_CLIENT_SECRET` | Google OAuth2 Client Secret.                                               | *blank* (No Google auth unless configured)   |
+| `SECRET_KEY`                 | Django secret key.                                                         | *Randomly generated at launch*               |
+| `TRUSTED_ORIGINS`            | List of trusted origins. Format: comma-seperated `scheme://host:port`      | *blank* (must configure unless `DEBUG=True`) |
 
 ## Authentication
 
