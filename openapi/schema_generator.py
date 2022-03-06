@@ -34,4 +34,6 @@ Provide the token in the `Authorization` header in this format:
         # overwrite security for auth endpoints
         schema['paths'][reverse('rest_login')]['post']['security'] = []
         schema['paths'][reverse('rest_login_google')]['post']['security'] = []
+        # remove GET for logout endpoint (shouldn't even exist)
+        schema['paths'][reverse('rest_logout')].pop('get')
         return schema
