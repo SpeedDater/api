@@ -176,11 +176,12 @@ LOGIN_REDIRECT_URL = '/'
 # https://dj-rest-auth.readthedocs.io/en/latest/installation.html
 
 SITE_ID = 1
+ACCOUNT_ADAPTER = 'speeddater_api.allauth.adapters.NoSignupAdapter'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_PASSWORD_MIN_LENGTH = 8
-SOCIALACCOUNT_ADAPTER = "speeddater_api.social_account.SocialAccountEmailAsUsername"
+SOCIALACCOUNT_ADAPTER = 'speeddater_api.allauth.adapters.SocialEmailAsUsernameAdapter'
 SOCIALACCOUNT_LOGIN_ON_GET = True
 try:
     SOCIALACCOUNT_PROVIDERS = {
