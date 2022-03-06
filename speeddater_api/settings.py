@@ -82,7 +82,6 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
     # dj-rest-auth modules
     'dj_rest_auth',
 ]
@@ -186,16 +185,18 @@ ACCOUNT_PASSWORD_MIN_LENGTH = 8
 SOCIALACCOUNT_ADAPTER = 'speeddater_api.allauth.adapters.SocialEmailAsUsernameAdapter'
 SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
 SOCIALACCOUNT_LOGIN_ON_GET = True
+# configure Google OAuth credentials from environment variable
 try:
     SOCIALACCOUNT_PROVIDERS = {
         'google': {
             'APP': {
                 'client_id': environ['GOOGLE_OAUTH_CLIENT_ID'],
                 'secret': environ['GOOGLE_OAUTH_CLIENT_SECRET'],
-                'key': '' # not needed for Google
             }
         }
     }
+    # only enable Google auth if client_id and secret are configured
+    INSTALLED_APPS.append('allauth.socialaccount.providers.google')
 except KeyError:
     pass
 
