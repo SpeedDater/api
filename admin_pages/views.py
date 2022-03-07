@@ -8,12 +8,6 @@ from configuration.forms import *
 from configuration.models import *
 
 
-def add_admin_context(context):
-    context['site_header'] = settings.APP_NAME
-    context['site_url'] = '/'
-    context['has_permission'] = True
-
-
 class AdminLogoutRedirectView(RedirectView):
     query_string = True
     pattern_name = 'account_logout'
@@ -27,6 +21,11 @@ class MajorBulkUpdateView(FormView):
     form_class = BulkUpdateForm
     success_url = reverse_lazy('admin:configuration_major_changelist')
     template_name = 'bulk_import_majors.html'
+    extra_context = {
+        'title': 'Bulk import majors',
+        'site_header': settings.APP_NAME,
+        # TODO: why are buttons on the top-right (view site, log out, etc) missing?
+    }
 
     def form_valid(self, form):
         # load input per line
@@ -35,12 +34,6 @@ class MajorBulkUpdateView(FormView):
         objs = [Major(major=m) for m in majors]
         Major.objects.bulk_create(objs, ignore_conflicts=True)
         return super().form_valid(form)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Bulk import majors'
-        add_admin_context(context)
-        return context
 
 
 @method_decorator(staff_member_required(), name='dispatch')
@@ -51,6 +44,11 @@ class SkillBulkUpdateView(FormView):
     form_class = BulkUpdateForm
     success_url = reverse_lazy('admin:configuration_skill_changelist')
     template_name = 'bulk_import_skills.html'
+    extra_context = {
+        'title': 'Bulk import skills',
+        'site_header': settings.APP_NAME,
+        # TODO: why are buttons on the top-right (view site, log out, etc) missing?
+    }
 
     def form_valid(self, form):
         # load input per line
@@ -59,9 +57,3 @@ class SkillBulkUpdateView(FormView):
         objs = [Skill(skill=s) for s in skills]
         Skill.objects.bulk_create(objs, ignore_conflicts=True)
         return super().form_valid(form)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['title'] = 'Bulk import skills'
-        add_admin_context(context)
-        return context
