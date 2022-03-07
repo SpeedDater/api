@@ -7,7 +7,10 @@ from django.views.generic import View
 
 class GoogleLoginView(SocialLoginView):
     '''
-    A view for handling Google OAuth2 login
+    Processes Sign-in with Google OAuth.
+    To sign in with Google, call this endpoint with a Google OAuth code
+    (recommended), access_token, or id_token.
+    Returns an API Token for the authenticated user.
     '''
     adapter_class = GoogleOAuth2Adapter
     client_class = OAuth2Client
