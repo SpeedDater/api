@@ -39,11 +39,12 @@
 				});
 				tokenPromise.then(function updatePage(token) {
 					action.innerHTML = `
-					<p>You're logged in! A session is created, and your API Token is <code>${token}</code>.
-					<h3>Pages</h3>
+					<p>You're logged in! A session is created, and your API Token is <code>${token}</code> (also stored as a cookie).
+					<h3>Links</h3>
 					<ul>
-					<li><a href="/docs/">API docs</a></li>
-					<li><a href="/admin/">Admin Panel</a></li>
+					<li><a href="{% url 'openapi:swagger' %}">API docs</a></li>
+					<li><a href="{% url 'admin:index' %}">Admin Panel</a></li>
+					<li><a href="{% url 'frontend_test:logout' %}">Log out</a> (will revoke token)</li>
 					</ul>
 				`;
 				})

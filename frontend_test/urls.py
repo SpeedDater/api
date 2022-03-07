@@ -19,7 +19,7 @@ from frontend_test import views
 app_name = 'frontend_test'
 
 urlpatterns = [
-    path('oauth/step1/', views.OAuthStep1.as_view(), name="oauth_step1"),
-    path('oauth/step2/', views.OAuthStep2.as_view(), name="oauth_step2"),
-    path('oauth/logout/', views.OAuthLogout.as_view(), name="oauth_logout"),
+    path('', views.OAuthStep1.as_view(), name="step1"),
+    path('step2/', views.OAuthStep2.as_view(), name="step2"),
+    path('logout/', views.OAuthLogout.as_view(), name="logout"),
 ]

@@ -45,7 +45,7 @@ urlpatterns = [
     # Django admin
     path('admin/', admin.site.urls),
     # frontend test pages
-    path('', include('frontend_test.urls')),
+    path('oauth/', include('frontend_test.urls', namespace='frontend_test')),
     # OpenAPI and Swagger UI
     path('', include('openapi.urls', namespace='openapi')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
