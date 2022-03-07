@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.urls import reverse
 from rest_framework.schemas.openapi import SchemaGenerator
 
@@ -10,7 +11,7 @@ class SpeedDaterSchemaGenerator(SchemaGenerator):
     def get_schema(self, *args, **kwargs):
         schema = super().get_schema(*args, **kwargs)
         # add more info about the API
-        schema['info']['description'] = 'This is the REST API for the SpeedDater service.'
+        schema['info']['description'] = settings.APP_DESCRIPTION
         schema['info']['license'] = {
             'name': 'GNU AGPLv3',
             'url': 'https://www.gnu.org/licenses/agpl-3.0-standalone.html',
