@@ -1,5 +1,7 @@
 # SpeedDater API
 
+[![build](https://github.com/SpeedDater407/api/actions/workflows/build_main.yml/badge.svg?branch=main)](https://github.com/SpeedDater407/api/actions/workflows/build_main.yml)
+
 REST API for SpeedDater, powered by Django REST Framework.
 
 ## Configuration
