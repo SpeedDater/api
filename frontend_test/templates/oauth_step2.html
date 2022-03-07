@@ -4,11 +4,11 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>OAuth Step 2</title>
+	<title>OAuth Complete</title>
 </head>
 <body>
-	<h1>OAuth Step 2</h1>
-	<p id="auth-action">Authenticating...</p>
+	<h1>OAuth Complete</h1>
+	<div id="auth-action">Authenticating...</div>
 	<script>
 		const action = document.getElementById('auth-action');
 		// get query string
@@ -32,13 +32,24 @@
 		.then(response => {
 			if (response.ok) {
 				// authentication is successful, store token
-				response.json().then(function storeToken(json) {
-					document.cookie = 'token=' + json['key'] + ";path=/";
+				const tokenPromise = response.json().then(function dealWithToken(json) {
+					const token = json['key'];
+					document.cookie = 'token=' + token + ";path=/";
+					return token;
 				});
-				action.innerHTML = '<a href="/admin/">Go to Admin Panel</a>';
+				tokenPromise.then(function updatePage(token) {
+					action.innerHTML = `
+					<p>You're logged in! A session is created, and your API Token is <code>${token}</code>.
+					<h3>Pages</h3>
+					<ul>
+					<li><a href="/docs/">API docs</a></li>
+					<li><a href="/admin/">Admin Panel</a></li>
+					</ul>
+				`;
+				})
 			} else {
 				// auth failed
-				action.innerHTML = 'An error occurred... Please <a href="/oauth/step1/">start over</a>';
+				action.innerHTML = '<p>An error occurred... Please <a href="/oauth/step1/">start over</a></p>';
 			}
 		});
 	</script>
