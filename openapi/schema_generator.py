@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.template.loader import render_to_string
 from django.urls import reverse
 from rest_framework.schemas.openapi import SchemaGenerator
 
@@ -9,32 +10,38 @@ class SpeedDaterSchemaGenerator(SchemaGenerator):
     '''
 
     def get_schema(self, *args, **kwargs):
+        '''
+        Overrides the built-in get_schema() method to inject extra info
+        '''
         schema = super().get_schema(*args, **kwargs)
-        # add more info about the API
-        schema['info']['description'] = settings.APP_DESCRIPTION
+
+        # add API description from swagger-ui-description.md template
+        content_rendered = render_to_string('swagger-ui-description.md')
+        # haxx to convert to normal str: concat rendered template with empty str
+        # wtf why is there no way to convert from a django.utils.safestring.SafeString to str
+        schema['info']['description'] = content_rendered + ''
+
+        # add license info
         schema['info']['license'] = {
             'name': 'GNU AGPLv3',
             'url': 'https://www.gnu.org/licenses/agpl-3.0-standalone.html',
         }
         # add authentication spec
         schema['components']['securitySchemes'] = {
-            'API Token': {
+            'APIToken': {
                 'type': 'http',
-                'description': '''
-**[Generate API Token]()**  
-You may authenticate against the API with an API Token.  
-Provide the token in the `Authorization` header in this format:  
-`Authorization: Bearer <token>`
-				''',
+                'description': 'Provide your API Token here.',
                 'scheme': 'Bearer',
             }
         }
+        # require token authentication globally
         schema['security'] = [
-            {'API Token': []},
+            {'APIToken': []},
         ]
         # overwrite security for auth endpoints
         schema['paths'][reverse('rest_login')]['post']['security'] = []
         schema['paths'][reverse('rest_login_google')]['post']['security'] = []
-        # remove GET for logout endpoint (shouldn't even exist)
+        # remove GET for logout endpoint (shouldn't even exist in the first place)
         schema['paths'][reverse('rest_logout')].pop('get')
+
         return schema

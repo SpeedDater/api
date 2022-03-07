@@ -9,4 +9,3 @@ class SwaggerUIView(TemplateView):
     Shows interactive OpenAPI docs in Swagger UI
     '''
     template_name = 'swagger-ui.html'
-    extra_context = {'schema_url': 'openapi:schema'}

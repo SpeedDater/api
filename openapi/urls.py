@@ -21,10 +21,9 @@ from openapi import views
 from openapi.schema_generator import SpeedDaterSchemaGenerator
 
 app_name = 'openapi'
-api_title = f'{settings.APP_NAME} API' 
 
 urlpatterns = [
-    path('openapi', get_schema_view(title=api_title,
+    path('openapi', get_schema_view(title=f'{settings.APP_NAME} API',
                                     version=settings.APP_VERSION,
                                     generator_class=SpeedDaterSchemaGenerator,
                                     permission_classes=[AllowAny],
