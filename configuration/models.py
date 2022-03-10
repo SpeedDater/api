@@ -26,3 +26,12 @@ class SectionTime(models.Model):
 
     def __str__(self):
         return f'{self.start} - {self.end}'
+
+
+# available discussion sections
+class Section(models.Model):
+    number = models.CharField(primary_key=True, max_length=3, default='')
+    time = models.ForeignKey(SectionTime, models.CASCADE)
+
+    def __str__(self):
+        return self.number

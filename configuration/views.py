@@ -20,6 +20,17 @@ class MajorViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAdminOrReadOnly]
 
 
+class SectionViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+    '''
+    View and edit list of Discussion sections.
+    - All authenticated users may view (GET) sections.
+    - Staff can also add (POST), change (PUT/PATCH), and delete (DELETE) sections.
+    '''
+    queryset = Section.objects.all().order_by('number')
+    serializer_class = SectionSerializer
+    permission_classes = [permissions.IsAdminOrReadOnly]
+
+
 class SectionTimeViewSet(viewsets.ModelViewSet):
     '''
     View and edit choices of section times.

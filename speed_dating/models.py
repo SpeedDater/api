@@ -6,13 +6,14 @@ from configuration import models as config_models
 
 # main user profile for speed dating
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,
+                                primary_key=True)
     phone = models.CharField(max_length=10, blank=True, default='',
                              validators=[MinLengthValidator(10)],
                              verbose_name='Phone number',
                              help_text='Enter 10 digits, without any special characters')
-    availability = models.ManyToManyField(
-        config_models.SectionTime, blank=False)
+    availability = models.ManyToManyField(config_models.SectionTime,
+                                          blank=False)
     majors = models.ManyToManyField(config_models.Major, blank=False)
     interests = models.ManyToManyField(config_models.Skill,
                                        blank=False, related_name='interests')

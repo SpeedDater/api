@@ -9,6 +9,15 @@ class MajorSerializer(serializers.ModelSerializer):
         fields = ['id', 'major']
 
 
+class SectionSerializer(serializers.ModelSerializer):
+    start_time = serializers.CharField(source='time.start', read_only=True)
+    end_time = serializers.CharField(source='time.end', read_only=True)
+                 
+    class Meta:
+        model = Section
+        fields = ['number', 'start_time', 'end_time']
+
+
 class SectionTimeSerializer(serializers.ModelSerializer):
     class Meta:
         model = SectionTime

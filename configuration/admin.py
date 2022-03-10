@@ -2,9 +2,16 @@ from django.contrib import admin
 from configuration.models import *
 
 
+@admin.register(Section)
+class SectionAdmin(admin.ModelAdmin):
+	list_display = ['number', 'time']
+	search_fields = ['number']
+	ordering = ['number']
+
+
 @admin.register(SectionTime)
 class SectionTimeAdmin(admin.ModelAdmin):
-	search_fields = ['start']
+	search_fields = ['start', 'end']
 	ordering = ['start', 'end']
 
 

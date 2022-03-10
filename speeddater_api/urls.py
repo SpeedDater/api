@@ -26,7 +26,8 @@ import speed_dating.views
 router = routers.DefaultRouter()
 router.register('majors', configuration.views.MajorViewSet)
 router.register('profiles', speed_dating.views.ProfileViewSet)
-router.register('sections', configuration.views.SectionTimeViewSet)
+router.register('sections', configuration.views.SectionViewSet)
+router.register('section-times', configuration.views.SectionTimeViewSet)
 router.register('skills', configuration.views.SkillViewSet)
 router.register('users', configuration.views.UserViewSet)
 
