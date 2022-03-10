@@ -11,6 +11,7 @@ Configuration is handled via environment variables.
 | Environment variable         | Description                                                                | Default                                      |
 | ---------------------------- | -------------------------------------------------------------------------- | -------------------------------------------- |
 | `CORS_ALLOWED_ORIGINS`       | List of CORS allowed origins. Format: comma-seperated `scheme://host:port` | *blank* (no CORS header unless configured)   |
+| `FRONTEND_REDIRECT_URL`      | The URL where users will be redirected to after OAuth sign-in              | *blank* (none unless configured)             |
 | `DATABASE_TYPE`              | Database type. `sqlite3` or `postgresql`                                   | `sqlite3`                                    |
 | `DATABASE_NAME`              | Database name. If using SQLite, path to file.                              | `db.sqlite3`                                 |
 | `DATABASE_HOST`              | Database hostname.                                                         | *blank*                                      |

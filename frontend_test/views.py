@@ -9,7 +9,7 @@ class OAuthStep1(TemplateView):
 	def get_context_data(self, **kwargs):
 		context = {
 			'client_id': settings.SOCIALACCOUNT_PROVIDERS['google']['APP']['client_id'],
-			'redirect_uri': 'http://127.0.0.1:8000/oauth/step2/',
+			'redirect_uri': settings.FRONTEND_REDIRECT_URL,
 			'scope': 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile',
 		}
 		return context

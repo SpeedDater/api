@@ -195,6 +195,7 @@ LOGIN_REDIRECT_URL = '/'
 # https://dj-rest-auth.readthedocs.io/en/latest/installation.html
 
 SITE_ID = 1
+FRONTEND_REDIRECT_URL = environ.get('FRONTEND_REDIRECT_URL')
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
