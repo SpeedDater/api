@@ -9,49 +9,40 @@ from configuration.models import *
 from configuration.serializers import *
 
 
-class MajorViewSet(viewsets.ModelViewSet):
+class MajorViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     '''
-    View and edit choices of majors.
+    View the list of majors.
     - All authenticated users may view (GET) majors.
-    - Staff can also add (POST), change (PUT/PATCH), and delete (DELETE) majors.
     '''
     queryset = Major.objects.all().order_by('major')
     serializer_class = MajorSerializer
-    permission_classes = [permissions.IsAdminOrReadOnly]
 
 
 class SectionViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     '''
-    View and edit list of Discussion sections.
+    View the list of Discussion sections.
     - All authenticated users may view (GET) sections.
-    - Staff can also add (POST), change (PUT/PATCH), and delete (DELETE) sections.
     '''
     queryset = Section.objects.all().order_by('number')
     serializer_class = SectionSerializer
-    permission_classes = [permissions.IsAdminOrReadOnly]
 
 
-class SectionTimeViewSet(viewsets.ModelViewSet):
+class SectionTimeViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     '''
-    View and edit choices of section times.
+    View the list of section times.
     - All authenticated users may view (GET) section times.
-    - Staff can also add (POST), change (PUT/PATCH), and delete (DELETE) section
-      times.
     '''
     queryset = SectionTime.objects.all().order_by('start')
     serializer_class = SectionTimeSerializer
-    permission_classes = [permissions.IsAdminOrReadOnly]
 
 
-class SkillViewSet(viewsets.ModelViewSet):
+class SkillViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     '''
-    View and edit choices of skills.
+    View the list of skills.
     - All authenticated users may view (GET) skills.
-    - Staff can also add (POST), change (PUT/PATCH), and delete (DELETE) skills.
     '''
     queryset = Skill.objects.all().order_by('skill')
     serializer_class = SkillSerializer
-    permission_classes = [permissions.IsAdminOrReadOnly]
 
 
 class UserViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
