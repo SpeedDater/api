@@ -4,10 +4,10 @@ from speed_dating.models import Profile
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    autocomplete_fields = ['user', 'availability',
+    autocomplete_fields = ['user', 'current_section', 'availability',
                            'majors', 'interests', 'skills']
-    list_display = ['user', 'full_name', 'email']
-    list_filter = ['availability', 'majors']
+    list_display = ['user', 'full_name', 'email', 'current_section']
+    list_filter = ['current_section', 'availability']
     ordering = ['user']
     readonly_fields = ['email', 'full_name']
     search_fields = ['user__username', 'user__email',
@@ -16,7 +16,10 @@ class ProfileAdmin(admin.ModelAdmin):
         ('User', {
             'fields': ['user', 'full_name', 'email', 'phone']
         }),
+        ('Section', {
+            'fields': ['current_section', 'availability']
+        }),
         ('Profile', {
-            'fields': ['availability', 'majors', 'skills', 'interests', 'looking_for', 'anything_else'],
+            'fields': ['majors', 'skills', 'interests', 'looking_for', 'anything_else']
         }),
     ]

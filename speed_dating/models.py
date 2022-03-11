@@ -12,6 +12,8 @@ class Profile(models.Model):
                              validators=[MinLengthValidator(10)],
                              verbose_name='Phone number',
                              help_text='Enter 10 digits, without any special characters')
+    current_section = models.ForeignKey(config_models.Section,
+                                        on_delete=models.CASCADE, blank=False)
     availability = models.ManyToManyField(config_models.SectionTime,
                                           blank=False)
     majors = models.ManyToManyField(config_models.Major, blank=False)
