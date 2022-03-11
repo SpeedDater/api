@@ -15,7 +15,7 @@ class SectionSerializer(serializers.ModelSerializer):
                  
     class Meta:
         model = Section
-        fields = ['number', 'start_time', 'end_time']
+        fields = ['id', 'number', 'start_time', 'end_time']
 
 
 class SectionTimeSerializer(serializers.ModelSerializer):

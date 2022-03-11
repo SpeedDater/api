@@ -30,8 +30,8 @@ class SectionTime(models.Model):
 
 # available discussion sections
 class Section(models.Model):
-    number = models.CharField(primary_key=True, max_length=3, default='')
+    number = models.SmallIntegerField(unique=True, null=False)
     time = models.ForeignKey(SectionTime, models.CASCADE)
 
     def __str__(self):
-        return self.number
+        return str(self.number)
