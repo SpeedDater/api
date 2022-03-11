@@ -5,7 +5,7 @@ from teams.models import Team
 @admin.register(Team)
 class TeamAdmin(admin.ModelAdmin):
     autocomplete_fields = ['members', 'availability']
-    list_filter = ['availability', 'preferred_section']
+    list_filter = ['availability', 'preferred_section', 'assigned_section']
     ordering = ['id']
     readonly_fields = ['id']
     search_fields = ['id', 'members__username', 'members__email',
@@ -19,5 +19,8 @@ class TeamAdmin(admin.ModelAdmin):
         }),
         ('Availability', {
             'fields': ['availability', 'preferred_section'],
+        }),
+        ('Assignment', {
+            'fields': ['assigned_section'],
         }),
     ]

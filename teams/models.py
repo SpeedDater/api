@@ -5,9 +5,13 @@ from configuration.models import Section, SectionTime
 
 
 class Team(models.Model):
+    # TODO: team number based on section
     members = models.ManyToManyField(User)
     availability = models.ManyToManyField(SectionTime)
-    preferred_section = models.ForeignKey(Section, on_delete=models.CASCADE)
+    preferred_section = models.ForeignKey(Section, on_delete=models.CASCADE,
+                                          related_name='preferred_section')
+    assigned_section = models.ForeignKey(Section, on_delete=models.CASCADE, 
+                                         related_name='assigned_section')
 
     def save(self, *args, **kwargs):
         # TODO: FIX ADMIN CRASH
