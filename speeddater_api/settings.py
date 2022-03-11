@@ -74,6 +74,7 @@ INSTALLED_APPS = [
     'configuration',
     'openapi',
     'speed_dating',
+    'teams',
     # Django admin module
     'django.contrib.admin',
     # django-cors module
