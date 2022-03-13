@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from configuration.serializers import *
 from speed_dating.models import Profile
 
 
