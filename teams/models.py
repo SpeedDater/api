@@ -10,7 +10,8 @@ class Team(models.Model):
     availability = models.ManyToManyField(SectionTime)
     preferred_section = models.ForeignKey(Section, on_delete=models.CASCADE,
                                           related_name='preferred_section')
-    assigned_section = models.ForeignKey(Section, on_delete=models.CASCADE, 
+    assigned_section = models.ForeignKey(Section, on_delete=models.CASCADE,
+                                         null=True, blank=True,
                                          related_name='assigned_section')
 
     def save(self, *args, **kwargs):
@@ -18,11 +19,11 @@ class Team(models.Model):
         # this validates, but failed validation would just crash the admin panel
 
         # limit members to 2 or more
-        # if (self.members.count() < 2):
-        #     raise ValidationError('A team must have at least 2 members.')
-        # # limit members to 5 or less
-        # if (self.members.count() > 5):
-        #     raise ValidationError('A team many only have up to 5 members.')
+        if (self.members.count() < 2):
+            raise ValidationError('A team must have at least 2 members.')
+        # limit members to 5 or less
+        if (self.members.count() > 5):
+            raise ValidationError('A team many only have up to 5 members.')
         super().save(*args, **kwargs)
 
     def __str__(self):
