@@ -21,7 +21,7 @@ class ProfileViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         '''
         Standard create() method, but user can only create profile for
-        themselves, and only staff can create staff for others.
+        themselves, and only staff can create profiles for others.
         '''
         if not request.user.is_staff and request.user.id != request.data.get('user'):
             raise PermissionDenied()
