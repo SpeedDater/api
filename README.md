@@ -11,7 +11,7 @@ Configuration is handled via environment variables.
 | Environment variable         | Description                                                                | Default                                      |
 | ---------------------------- | -------------------------------------------------------------------------- | -------------------------------------------- |
 | `CORS_ALLOWED_ORIGINS`       | List of CORS allowed origins. Format: comma-seperated `scheme://host:port` | *blank* (no CORS header unless configured)   |
-| `DATABASE_TYPE`              | Database type. `sqlite3` or `postgresql`                                   | `sqlite3`                                    |
+| `DATABASE_TYPE`              | Database type. `sqlite3`, `mysql`, or `postgresql`                         | `sqlite3`                                    |
 | `DATABASE_NAME`              | Database name. If using SQLite, path to file.                              | `db.sqlite3`                                 |
 | `DATABASE_HOST`              | Database hostname.                                                         | *blank*                                      |
 | `DATABASE_PORT`              | Database port number.                                                      | *blank*                                      |
