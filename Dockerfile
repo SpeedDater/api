@@ -2,8 +2,13 @@ FROM python:3.10-slim
 
 COPY requirements.txt /tmp/requirements.txt
 
-RUN pip3 install --no-cache -r /tmp/requirements.txt && \
-    rm -f /tmp/requirements.txt 
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends gcc libmariadb-dev && \
+	pip3 install --no-cache -r /tmp/requirements.txt && \
+    apt-get purge -y gcc && \
+    apt-get autopurge -y && \
+    apt-get autoclean && \
+    rm -rf /tmp/requirements.txt /var/log/apt /var/cache/apt /var/lib/apt
 
 COPY . /app/
 WORKDIR /app
