@@ -22,7 +22,7 @@ class Profile(models.Model):
     skills = models.ManyToManyField(config_models.Skill,
                                     blank=False, related_name='skills')
     looking_for = models.TextField(blank=False)
-    anything_else = models.TextField(blank=False)
+    anything_else = models.TextField(blank=True)
 
     def full_name(self):
         return self.user.get_full_name()
