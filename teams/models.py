@@ -5,7 +5,7 @@ from configuration.models import Section, SectionTime
 
 
 class Team(models.Model):
-    # TODO: team number based on section
+    number = models.SmallIntegerField(null=True, verbose_name='Team number')
     members = models.ManyToManyField(User)
     availability = models.ManyToManyField(SectionTime)
     preferred_section = models.ForeignKey(Section, on_delete=models.CASCADE,
@@ -24,7 +24,18 @@ class Team(models.Model):
         # limit members to 5 or less
         if (self.members.count() > 5):
             raise ValidationError('A team many only have up to 5 members.')
+
+        # change Team ID to section + # in section (ex. 407)
+        # only assign number if team is assigned to section and there isn't a number yet
+        if self.assigned_section and not self.number:
+            num_in_section = Team.objects.filter(
+                assigned_section=self.assigned_section).count() + 1
+            num_in_section = str(num_in_section).zfill(2)
+            self.number = int(f'{self.assigned_section}{num_in_section}')
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f'Team {self.id}'
+        if self.number:
+            return f'Team {self.number}'
+        else:
+            return f'** Unassigned #{self.id} **'
