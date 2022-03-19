@@ -7,7 +7,7 @@ from speeddater_api.helpers import num_digits, first_n_digits
 
 
 class Team(models.Model):
-    number = models.SmallIntegerField(verbose_name='Team number')
+    number = models.SmallIntegerField(verbose_name='Team number', unique=True)
     member1 = models.OneToOneField(User, on_delete=models.CASCADE,
                                    related_name='member1', blank=True, null=True)
     member2 = models.OneToOneField(User, on_delete=models.CASCADE,
