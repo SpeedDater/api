@@ -22,6 +22,7 @@ from rest_framework import routers
 from speeddater_api.allauth.views import GoogleLoginView
 import configuration.views
 import speed_dating.views
+import teams.views
 
 router = routers.DefaultRouter()
 router.register('majors', configuration.views.MajorViewSet)
@@ -29,11 +30,13 @@ router.register('profiles', speed_dating.views.ProfileViewSet)
 router.register('sections', configuration.views.SectionViewSet)
 router.register('section-times', configuration.views.SectionTimeViewSet)
 router.register('skills', configuration.views.SkillViewSet)
+router.register('teams', teams.views.TeamViewSet)
 router.register('users', configuration.views.UserViewSet)
 
 urlpatterns = [
     # API endpoints
     path('', include(router.urls)),
+    path('teams/<str:number>/members/', teams.views.TeamMemberView.as_view()),
     # django-allauth (using a subset of its urls)
     path('auth/', include('speeddater_api.allauth.urls')),
     # dj-rest-auth
