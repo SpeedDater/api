@@ -36,6 +36,7 @@ router.register('users', configuration.views.UserViewSet)
 urlpatterns = [
     # API endpoints
     path('', include(router.urls)),
+    path('teams/<str:number>/members/', teams.views.TeamMemberView.as_view()),
     # django-allauth (using a subset of its urls)
     path('auth/', include('speeddater_api.allauth.urls')),
     # dj-rest-auth
