@@ -71,10 +71,10 @@ class Team(models.Model):
             section_in_team_num = first_n_digits(assigned_section_num,
                                                  num_digits(assigned_section_num))
             if assigned_section_num != section_in_team_num:
-                num_in_section = Team.objects.filter(
-                    assigned_section=self.assigned_section).count() + 1
-                num_in_section = str(num_in_section).zfill(2)
-                self.number = int(f'{self.assigned_section}{num_in_section}')
+                teams_sorted = Team.objects.filter(
+                    assigned_section=self.assigned_section).order_by('-number')
+                highest_num = teams_sorted[0].number
+                self.number = highest_num + 1
         # invalidate Team Number if team becomes unassigned
         elif not self.assigned_section:
             self.number = -1 * self.id
