@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.template.loader import render_to_string
 from django.urls import reverse
 from rest_framework.schemas.openapi import SchemaGenerator

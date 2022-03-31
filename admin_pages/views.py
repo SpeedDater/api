@@ -1,11 +1,9 @@
 from django.conf import settings
 from django.contrib.admin.views.decorators import staff_member_required
-from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import FormView, RedirectView
-from configuration.forms import *
-from configuration.models import *
+from configuration import forms, models
 
 
 class AdminLogoutRedirectView(RedirectView):
@@ -18,7 +16,7 @@ class MajorBulkUpdateView(FormView):
     '''
     Bulk import majors from the Admin Panel
     '''
-    form_class = BulkUpdateForm
+    form_class = forms.BulkUpdateForm
     success_url = reverse_lazy('admin:configuration_major_changelist')
     template_name = 'bulk_import_majors.html'
     extra_context = {
@@ -32,7 +30,7 @@ class MajorBulkUpdateView(FormView):
         majors = form.cleaned_data['content'].split('\r\n')
         # build objects list, bulk create in db, ignore non-unique objects
         objs = [Major(major=m) for m in majors]
-        Major.objects.bulk_create(objs, ignore_conflicts=True)
+        models.Major.objects.bulk_create(objs, ignore_conflicts=True)
         return super().form_valid(form)
 
 
@@ -41,7 +39,7 @@ class SkillBulkUpdateView(FormView):
     '''
     Bulk import skills from the Admin Panel
     '''
-    form_class = BulkUpdateForm
+    form_class = forms.BulkUpdateForm
     success_url = reverse_lazy('admin:configuration_skill_changelist')
     template_name = 'bulk_import_skills.html'
     extra_context = {
@@ -55,5 +53,5 @@ class SkillBulkUpdateView(FormView):
         skills = form.cleaned_data['content'].split('\r\n')
         # build objects list, bulk create in db, ignore non-unique objects
         objs = [Skill(skill=s) for s in skills]
-        Skill.objects.bulk_create(objs, ignore_conflicts=True)
+        models.Skill.objects.bulk_create(objs, ignore_conflicts=True)
         return super().form_valid(form)

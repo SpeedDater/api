@@ -1,11 +1,11 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from configuration.models import *
+from configuration import models
 
 
 class MajorSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Major
+        model = models.Major
         fields = ['id', 'major']
 
 
@@ -14,19 +14,19 @@ class SectionSerializer(serializers.ModelSerializer):
     end_time = serializers.CharField(source='time.end', read_only=True)
                  
     class Meta:
-        model = Section
+        model = models.Section
         fields = ['id', 'number', 'start_time', 'end_time']
 
 
 class SectionTimeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = SectionTime
+        model = models.SectionTime
         fields = ['id', 'start', 'end']
 
 
 class SkillSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Skill
+        model = models.Skill
         fields = ['id', 'skill']
 
 

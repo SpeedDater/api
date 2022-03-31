@@ -5,8 +5,7 @@ from rest_framework import mixins, viewsets, views
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.response import Response
 from speeddater_api import permissions
-from teams.models import Team
-from teams.serializers import *
+from teams import models, serializers
 
 
 class TeamViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
@@ -17,9 +16,9 @@ class TeamViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.Gen
     - If user attempts to add a person to an empty team (or when student isn't
       in a team yet), a new team will be created automatically.
     '''
-    queryset = Team.objects.all().order_by('number')
+    queryset = models.Team.objects.all().order_by('number')
     lookup_field = 'number'
-    serializer_class = TeamSerializer
+    serializer_class = serializers.TeamSerializer
     permission_classes = [permissions.IsAdminOwnerOrReadOnly]
 
 
@@ -49,7 +48,7 @@ class TeamMemberView(views.APIView):
     def get(self, request, format=None, *args, **kwargs):
         number = kwargs['number']
         try:
-            team = Team.objects.get(number=number)
+            team = models.Team.objects.get(number=number)
         except (Team.DoesNotExist, ValueError):
             return Response({'error': f'{number} is not a valid team number.'}, status=400)
         # return team members
@@ -59,8 +58,8 @@ class TeamMemberView(views.APIView):
     def put(self, request, format=None, *args, **kwargs):
         number = kwargs['number']
         try:
-            team = Team.objects.get(number=number)
-        except Team.DoesNotExist:
+            team = models.Team.objects.get(number=number)
+        except models.Team.DoesNotExist:
             return Response({'error': f'{number} is not a valid team number.'}, status=400)
         # can't edit teams that user isn't a part of
         if not request.user.is_staff and request.user.id not in members:

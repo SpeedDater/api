@@ -1,5 +1,5 @@
 from importlib import import_module
-from django.urls import include, path
+from django.urls import path
 from allauth import app_settings
 from allauth.account import views as account_views
 from allauth.socialaccount import views as social_views
