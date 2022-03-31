@@ -9,7 +9,7 @@ class OAuthStep1(TemplateView):
 		context = {
 			'client_id': settings.SOCIALACCOUNT_PROVIDERS['google']['APP']['client_id'],
 			'redirect_uri': settings.FRONTEND_REDIRECT_URL,
-			'scope': 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile',
+			'scope': 'profile email',
 		}
 		return context
 
