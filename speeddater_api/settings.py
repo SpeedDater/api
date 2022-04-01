@@ -232,8 +232,6 @@ REST_FRAMEWORK = {
         # require auth for all API endpoints by default
         'rest_framework.permissions.IsAuthenticated'
     ],
-    # paginated routes - 25 items per page
-    'PAGE_SIZE': 25,
 }
 
 # django-cors-headers
