@@ -27,4 +27,11 @@ Authorization: Bearer <token>
 
 On this page, you may include the API Token by using the **Authorize** button below.
 
+### Open Source
+
+SpeedDater is open source! Check out [SpeedDater on GitHub](https://github.com/SpeedDater407).
+
+Contributions are always welcome, no matter how large or small. If you'd like to report an issue or contribute code, 
+please do so [on GitHub](https://github.com/SpeedDater407). Thanks!
+
 ### License
