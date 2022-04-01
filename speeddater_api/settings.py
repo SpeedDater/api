@@ -232,9 +232,6 @@ REST_FRAMEWORK = {
         # require auth for all API endpoints by default
         'rest_framework.permissions.IsAuthenticated'
     ],
-    # default to 20 items per page
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 20,
 }
 
 # django-cors-headers
