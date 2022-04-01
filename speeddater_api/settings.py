@@ -18,7 +18,7 @@ from speeddater_api.helpers import bcolors
 
 # Application NAME and VERSION
 APP_NAME = 'SpeedDater'
-APP_VERSION = '0.7.1-alpha'
+APP_VERSION = '0.8.0-alpha'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

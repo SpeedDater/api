@@ -48,7 +48,10 @@ class SkillViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.Ge
 class UserViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     '''
     View names and email addresses of users.
-    - All authenticated users can only view (GET) user information.
+    - All authenticated users can only view (GET) user information, including 
+      name, email address, and profile picture (if applicable).
+    - Name and email address are required and always included. Profile picture
+      would be `null` if it does not exist.
     - To make changes to your own account, see `/rest-auth/user/`.
     '''
     queryset = User.objects.all().order_by('last_name', 'first_name')
