@@ -1,4 +1,3 @@
-from rest_framework.pagination import PageNumberPagination
 import math
 
 
@@ -12,13 +11,6 @@ class bcolors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
-
-
-class PageNumberPagination25(PageNumberPagination):
-    '''
-    Standard DRF PageNumberPagination, with default page size of 25.
-    '''
-    page_size = 25
 
 
 def num_digits(number):
