@@ -18,7 +18,7 @@ from speeddater_api.helpers import bcolors
 
 # Application NAME and VERSION
 APP_NAME = 'SpeedDater'
-APP_VERSION = '0.8.0-alpha'
+APP_VERSION = '0.8.1-alpha'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -189,6 +189,12 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # https://docs.djangoproject.com/en/4.0/ref/settings/#login-url
 
 LOGIN_REDIRECT_URL = '/'
+
+# Silence some Django system checks
+# https://docs.djangoproject.com/en/4.0/ref/settings/#silenced-system-checks
+
+# disable DRF check for PAGE_SIZE configuration
+SILENCED_SYSTEM_CHECKS = ["rest_framework.W001"]
 
 # django-allauth and dj-rest-auth
 # https://dj-rest-auth.readthedocs.io/en/latest/installation.html
