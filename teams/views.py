@@ -5,6 +5,7 @@ from rest_framework import mixins, viewsets, views
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.response import Response
 from speeddater_api import permissions
+from speeddater_api.helpers import PageNumberPagination25
 from teams.models import Team
 from teams.serializers import *
 
@@ -19,8 +20,9 @@ class TeamViewSet(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.Gen
     '''
     queryset = Team.objects.all().order_by('number')
     lookup_field = 'number'
-    serializer_class = TeamSerializer
+    pagination_class = PageNumberPagination25
     permission_classes = [permissions.IsAdminOwnerOrReadOnly]
+    serializer_class = TeamSerializer
 
 
 class TeamMemberView(views.APIView):
