@@ -18,6 +18,7 @@ Configuration is handled via environment variables.
 | `DATABASE_USERNAME`          | Database server username.                                                  | *blank*                                      |
 | `DATABASE_PASSWORD`          | Database server password.                                                  | *blank*                                      |
 | `DEBUG`                      | Set to `True` to enable Django debug mode                                  | `False`                                      |
+| `DISABLE_PASSWORD_LOGIN`     | Set to `True` to disable username/password login. Only use Google sign-in. | `False`                                      |
 | `GOOGLE_OAUTH_CLIENT_ID`     | Google OAuth2 Client ID.                                                   | *blank* (No Google auth unless configured)   |
 | `GOOGLE_OAUTH_CLIENT_SECRET` | Google OAuth2 Client Secret.                                               | *blank* (No Google auth unless configured)   |
 | `SECRET_KEY`                 | Django secret key.                                                         | *Randomly generated at launch*               |

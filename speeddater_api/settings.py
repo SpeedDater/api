@@ -18,7 +18,7 @@ from speeddater_api.helpers import bcolors
 
 # Application NAME and VERSION
 APP_NAME = 'SpeedDater'
-APP_VERSION = '0.8.1-alpha'
+APP_VERSION = '0.8.2-alpha'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -207,6 +207,11 @@ ACCOUNT_PASSWORD_MIN_LENGTH = 8
 SOCIALACCOUNT_ADAPTER = 'speeddater_api.allauth.adapters.SocialEmailAsUsernameAdapter'
 SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
 SOCIALACCOUNT_LOGIN_ON_GET = True
+# allow username/password to be disabled
+try:
+    DISABLE_PASSWORD_LOGIN = (environ['DISABLE_PASSWORD_LOGIN'].lower() == 'true')
+except KeyError:
+    DISABLE_PASSWORD_LOGIN = False
 # configure Google OAuth credentials from environment variable
 try:
     SOCIALACCOUNT_PROVIDERS = {

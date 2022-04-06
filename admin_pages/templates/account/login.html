@@ -6,12 +6,12 @@
 {% block extra %}{% endblock %}
 {% get_providers as socialaccount_providers %}
 {% if socialaccount_providers %}
-<h3>Identity Providers</h3>
-  {% for provider in socialaccount_providers %}
-  <a title="{{ provider.name }}" href="{% provider_login_url provider.id process='login' %}">{{ provider.name }}</a>&nbsp;
-  {% endfor %}
+{% for provider in socialaccount_providers %}
+<p><a title="{{ provider.name }}" href="{% provider_login_url provider.id process='login' %}">Sign in with {{ provider.name }}</a></p>
+{% endfor %}
 {% endif %}
 
+{% if not DISABLE_PASSWORD_LOGIN %}
 <h3>Username/Password</h3>
 <form method="POST">
   {% csrf_token %}
@@ -21,4 +21,5 @@
   {% endif %}
   <p><button type="submit">Log In</button></p>
 </form>
+{% endif %}
 {% endblock %}
