@@ -3,6 +3,7 @@ from allauth.socialaccount.providers.oauth2.client import OAuth2Client
 from dj_rest_auth.registration.views import SocialLoginView
 from django.http import Http404
 from django.views.generic import View
+from os import environ
 
 
 class GoogleLoginView(SocialLoginView):
@@ -14,7 +15,7 @@ class GoogleLoginView(SocialLoginView):
     '''
     adapter_class = GoogleOAuth2Adapter
     client_class = OAuth2Client
-    callback_url = 'http://127.0.0.1:8000/oauth/step2/'
+    callback_url = environ.get('FRONTEND_REDIRECT_URL')
 
 
 class PageNotFoundView(View):
