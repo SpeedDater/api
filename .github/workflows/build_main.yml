@@ -9,7 +9,7 @@ jobs:
     name: Build Container Image
     runs-on: ubuntu-latest
     env:
-      ORG: speeddater407
+      ORG: speeddater
       REPO: api
     steps:
       - name: Set up QEMU
